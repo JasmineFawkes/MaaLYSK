@@ -184,7 +184,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["minigame/沈星回.png"],
+				"template": ["沈星回.png"],
 				"roi": [196, 193, 99, 106]
 			}
 		},
@@ -203,7 +203,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["minigame/黎深.png"],
+				"template": ["黎深.png"],
 				"roi": [380, 411, 122, 114]
 			}
 		},
@@ -222,7 +222,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["minigame/祁煜.png"],
+				"template": ["祁煜.png"],
 				"roi": [186, 624, 118, 111]
 			}
 		},
@@ -241,7 +241,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["minigame/秦彻.png"],
+				"template": ["秦彻.png"],
 				"roi": [422, 819, 110, 111]
 			}
 		},
@@ -260,7 +260,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["minigame/夏以昼.png"],
+				"template": ["夏以昼.png"],
 				"roi": [202, 1013, 94, 106]
 			}
 		},
