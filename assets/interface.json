@@ -179,7 +179,7 @@
 				"秦彻抓不抓",
 				"夏以昼抓不抓"
 			],
-			"description": "秒退已完全支持\n\n抓二爪娃娃机目前可顺利运行,也可能会中途卡。\n\n[color:red]不保证每局都抓4-5只,觉得概率低的自行抓取[/color]"
+			"description": "可选秒退和自己抓二爪模式\n\n抓二爪娃娃机目前可顺利运行，遇到男主直接开始抓了会尝试切换成自己抓（点名小鱼！）。\n\n可以自定义二爪娃娃机按钮按下的时长\n\n[color:red]由于模拟器卡顿、娃娃弹跳等情况，不保证每局都抓4-5只，觉得概率低的自行抓取[/color]"
 		},
 		{
 			"name": "=====特色功能=====",
@@ -856,6 +856,7 @@
 				{
 					"name": "过剧情抓二爪娃娃",
 					"description": "抓二爪娃娃,由于卡顿不保证每次都抓到",
+					"option": ["蓝色按钮按下时间", "绿色按钮按下时间"],
 					"pipeline_override": {
 						"娃娃机游戏中页面": {
 							"next": ["点击自动"]
@@ -863,6 +864,52 @@
 					}
 				}
 			]
+		},
+		"绿色按钮按下时间": {
+			"type": "input",
+			"description": "自定义绿色按钮长按时间",
+			"inputs": [
+				{
+					"name": "green_duration",
+					"label": "绿色按钮按下时间",
+					"pipeline_type": "int",
+					"default": "320"
+				}
+			],
+			"pipeline_override": {
+				"抓娃娃绿色按钮": {
+					"action": {
+						"type": "LongPress",
+						"param": {
+							"duration": "{green_duration}",
+							"target": [159, 1147, 11, 8]
+						}
+					}
+				}
+			}
+		},
+		"蓝色按钮按下时间": {
+			"type": "input",
+			"description": "自定义蓝色按钮长按时间",
+			"inputs": [
+				{
+					"name": "blue_duration",
+					"label": "蓝色按钮按下时间",
+					"pipeline_type": "int",
+					"default": "580"
+				}
+			],
+			"pipeline_override": {
+				"抓娃娃蓝色按钮": {
+					"action": {
+						"type": "LongPress",
+						"param": {
+							"duration": "{blue_duration}",
+							"target": [323, 1146, 13, 14]
+						}
+					}
+				}
+			}
 		},
 		"沈星回抓不抓": {
 			"type": "switch",

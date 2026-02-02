@@ -30,7 +30,7 @@
 		"focus": {
 			"Node.Action.Succeeded": "进入快乐出游"
 		},
-		"post_delay": 400,
+		"post_delay": 1000,
 		"next": [
 			"[JumpBack]娃娃机_选择沈星回",
 			"[JumpBack]娃娃机_选择黎深",
@@ -284,6 +284,7 @@
 			"param": {
 				"target_offset": [5, 5, -10, -10]
 			}
-		}
+		},
+		"post_delay": 1000
 	}
 }
