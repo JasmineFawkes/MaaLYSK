@@ -124,7 +124,8 @@
 		"next": [
 			"[JumpBack]选择朋友圈回复",
 			"[JumpBack]退出获取奖励popop",
-			"[JumpBack]退出牵绊度提升popop"
+			"[JumpBack]退出牵绊度提升popop",
+			"[JumpBack]朋友圈向下滑"
 		]
 	},
 	"读祁煜朋友圈": {
@@ -224,7 +225,7 @@
 			"[JumpBack]选择朋友圈回复",
 			"[JumpBack]退出获取奖励popop",
 			"[JumpBack]退出牵绊度提升popop",
-			"[JumpBack]朋友圈找一找"
+			"[JumpBack]朋友圈向下滑"
 		]
 	},
 	"读夏以昼朋友圈": {
