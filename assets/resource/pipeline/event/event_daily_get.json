@@ -11,7 +11,7 @@
 		"next": [
 			"权冕终戏菜单",
 			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获取奖励popop",
+			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]点击活动",
 			"[JumpBack]返回上一级页面",
 			"[JumpBack]导航回主页面"
@@ -51,7 +51,7 @@
 		"on_error": [
 			"焕梦映此菜单",
 			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获取奖励popop",
+			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]点击活动",
 			"[JumpBack]返回上一级页面"
 		]
@@ -74,7 +74,7 @@
 		"next": [
 			"焕梦映此菜单",
 			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获取奖励popop",
+			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]点击活动",
 			"[JumpBack]返回上一级页面"
 		]
@@ -115,7 +115,7 @@
 		"on_error": [
 			"剪影裁诗菜单",
 			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获取奖励popop",
+			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]点击活动",
 			"[JumpBack]返回上一级页面"
 		]
@@ -138,7 +138,7 @@
 		"next": [
 			"剪影裁诗菜单",
 			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获取奖励popop",
+			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]点击活动",
 			"[JumpBack]返回上一级页面"
 		]
@@ -326,7 +326,7 @@
 		"repeat": 3,
 		"repeat_delay": 1000,
 		"timeout": 4000,
-		"next": ["纸间小铺裁纸", "[JumpBack]退出获取奖励popop"]
+		"next": ["纸间小铺裁纸", "[JumpBack]退出获得奖励popop"]
 	},
 	"纸间小铺裁纸": {
 		"recognition": {

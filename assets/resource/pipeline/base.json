@@ -144,6 +144,23 @@
 		"post_delay": 4000,
 		"next": []
 	},
+	"点击牵绊": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"roi": [631, 1026, 69, 60],
+				"expected": ["牵绊", "牵", "绊"]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target": [662, 1038, 7, 6]
+			}
+		},
+		"post_delay": 4000,
+		"next": []
+	},
 	"点击零点追踪": {
 		"recognition": {
 			"type": "OCR",

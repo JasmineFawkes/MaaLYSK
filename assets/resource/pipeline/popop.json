@@ -68,7 +68,7 @@
 		"focus": "退出剧情回顾",
 		"next": ["返回等待"]
 	},
-	"退出获取奖励popop": {
+	"退出获得奖励popop": {
 		"recognition": {
 			"type": "OCR",
 			"param": {

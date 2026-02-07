@@ -115,7 +115,7 @@
 		"timeout": 6000,
 		"next": [
 			"月礼包点点",
-			"[JumpBack]退出获取奖励popop",
+			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]退出领取点击popop"
 		]
 	},
