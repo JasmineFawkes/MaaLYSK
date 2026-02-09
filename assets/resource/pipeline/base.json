@@ -188,7 +188,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["fight/lingdianzhuizong/豆佬.png"],
+				"template": ["fight/bounty_hunt/豆佬.png"],
 				"roi": [394, 121, 237, 318]
 			}
 		},
