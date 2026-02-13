@@ -264,7 +264,8 @@
 			"name": "🌟限时活动每日领取",
 			"entry": "进入限时活动",
 			"default_check": false,
-			"description": "限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画\n\n[color:red]目前关闭中，请不要勾选[/color]"
+			"option": ["韶华宴岁领取", "吉财临门领取", "金叶盈福领取"],
+			"description": "[color:orange]当前版本：韶华宴岁、吉财临门[/color]\n\n限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画"
 		},
 		{
 			"name": " 🏅喵喵牌限时抽卡",
@@ -1585,6 +1586,72 @@
 					"expected": ["{Caleb_nickname}"]
 				}
 			}
+		},
+		"韶华宴岁领取": {
+			"type": "switch",
+			"description": "领经营任务奖励",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"进入韶华宴岁": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"进入韶华宴岁": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"吉财临门领取": {
+			"type": "switch",
+			"description": "领所有可领的,识别时间比较长,耐心等待",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"进入吉财临门": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"进入吉财临门": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"金叶盈福领取": {
+			"type": "switch",
+			"description": "免费摇福",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"进入金叶盈福": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"进入金叶盈福": {
+							"enabled": false
+						}
+					}
+				}
+			]
 		}
 	}
 }

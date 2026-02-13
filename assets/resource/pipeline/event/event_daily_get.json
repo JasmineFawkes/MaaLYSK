@@ -9,7 +9,23 @@
 			"param": {}
 		},
 		"next": [
-			"权冕终戏菜单",
+			"[JumpBack]进入韶华宴岁",
+			"[JumpBack]进入吉财临门",
+			"[JumpBack]进入金叶盈福"
+		]
+	},
+	"进入韶华宴岁": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"max_hit": 1,
+		"next": [
+			"韶华宴岁菜单",
 			"[JumpBack]退出点击空白继续popop",
 			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]点击活动",
@@ -17,12 +33,12 @@
 			"[JumpBack]导航回主页面"
 		]
 	},
-	"权冕终戏菜单": {
+	"韶华宴岁菜单": {
 		"recognition": {
-			"type": "OCR",
+			"type": "TemplateMatch",
 			"param": {
-				"expected": ["权冕终戏", "权冕", "终戏"],
-				"roi": [6, 1182, 696, 66]
+				"template": ["event/韶华宴岁菜单.png"],
+				"roi": [10, 1179, 701, 79]
 			}
 		},
 		"action": {
@@ -30,276 +46,31 @@
 			"param": {}
 		},
 		"post_delay": 1000,
-		"repeat": 3,
-		"next": ["权冕中戏限时领取"]
+		"repeat": 2,
+		"next": ["韶华宴岁限时领取"]
 	},
-	"权冕中戏限时领取": {
+	"韶华宴岁限时领取": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["王室日程", "日程"],
-				"roi": [577, 165, 140, 69]
+				"expected": ["经营任务", "任务"],
+				"roi": [596, 185, 118, 66]
 			}
 		},
 		"action": {
 			"type": "Click",
 			"param": {}
 		},
-		"timeout": 4000,
-		"next": ["权冕活动一键领取"],
+		"timeout": 5000,
 		"post_delay": 2000,
-		"on_error": [
-			"焕梦映此菜单",
-			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获得奖励popop",
-			"[JumpBack]点击活动",
-			"[JumpBack]返回上一级页面"
-		]
+		"next": ["韶华活动一键领取"]
 	},
-	"权冕活动一键领取": {
+	"韶华活动一键领取": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
 				"expected": ["一键领取", "键领取", "领取"],
-				"roi": [169, 1047, 351, 176]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"repeat": 10,
-		"post_delay": 2000,
-		"focus": "权冕终戏每日领取成功!",
-		"next": [
-			"焕梦映此菜单",
-			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获得奖励popop",
-			"[JumpBack]点击活动",
-			"[JumpBack]返回上一级页面"
-		]
-	},
-	"焕梦映此菜单": {
-		"recognition": {
-			"type": "OCR",
-			"param": {
-				"expected": ["焕梦映此", "焕梦", "映此"],
-				"roi": [385, 1167, 321, 96]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"pre_delay": 1000,
-		"post_delay": 1000,
-		"timeout": 3000,
-		"next": ["焕梦映此限时领取"],
-		"on_error": ["焕梦映此菜单"]
-	},
-	"焕梦映此限时领取": {
-		"recognition": {
-			"type": "OCR",
-			"param": {
-				"expected": ["活动任务", "任务"],
-				"roi": [478, 1047, 187, 93]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"timeout": 4000,
-		"post_delay": 2000,
-		"next": ["焕梦映此一键领取"],
-		"on_error": [
-			"剪影裁诗菜单",
-			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获得奖励popop",
-			"[JumpBack]点击活动",
-			"[JumpBack]返回上一级页面"
-		]
-	},
-	"焕梦映此一键领取": {
-		"recognition": {
-			"type": "OCR",
-			"param": {
-				"expected": ["一键领取", "键领取", "领取"],
-				"roi": [437, 1078, 187, 93]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"repeat": 3,
-		"post_delay": 2000,
-		"focus": "焕梦映此每日领取成功!",
-		"next": [
-			"剪影裁诗菜单",
-			"[JumpBack]退出点击空白继续popop",
-			"[JumpBack]退出获得奖励popop",
-			"[JumpBack]点击活动",
-			"[JumpBack]返回上一级页面"
-		]
-	},
-	"剪影裁诗菜单": {
-		"recognition": {
-			"type": "OCR",
-			"param": {
-				"expected": ["剪影裁诗", "剪影", "裁诗"],
-				"roi": [235, 1180, 275, 81]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"timeout": 3000,
-		"next": ["[JumpBack]剪影裁诗限时领取"],
-		"on_error": ["剪影裁诗菜单"]
-	},
-	"剪影裁诗限时领取": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["event/剪影切换人物.png"],
-				"roi": [0, 269, 112, 129]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"max_hit": 5,
-		"next": [
-			"剪纸_选择沈星回",
-			"剪纸_选择黎深",
-			"剪纸_选择祁煜",
-			"剪纸_选择秦彻",
-			"剪纸_选择夏以昼"
-		]
-	},
-	"剪纸_选择沈星回": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["沈星回.png"],
-				"roi": [196, 193, 99, 106]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"timeout": 4000,
-		"focus": "沈星回剪纸",
-		"next": ["进入剪纸页面"],
-		"on_error": ["裁剪完成领取", "纸间小铺裁纸"]
-	},
-	"剪纸_选择黎深": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["黎深.png"],
-				"roi": [380, 411, 122, 114]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"timeout": 4000,
-		"focus": "黎深剪纸",
-		"next": ["进入剪纸页面"],
-		"on_error": ["裁剪完成领取", "纸间小铺裁纸"]
-	},
-	"剪纸_选择祁煜": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["祁煜.png"],
-				"roi": [186, 624, 118, 111]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"timeout": 4000,
-		"focus": "祁煜剪纸",
-		"next": ["进入剪纸页面"],
-		"on_error": ["裁剪完成领取", "纸间小铺裁纸"]
-	},
-	"剪纸_选择秦彻": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["秦彻.png"],
-				"roi": [422, 819, 110, 111]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"timeout": 4000,
-		"focus": "秦彻剪纸",
-		"next": ["进入剪纸页面"],
-		"on_error": ["裁剪完成领取", "纸间小铺裁纸"]
-	},
-	"剪纸_选择夏以昼": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["夏以昼.png"],
-				"roi": [202, 1013, 94, 106]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"timeout": 4000,
-		"focus": "夏以昼剪纸",
-		"next": ["进入剪纸页面"],
-		"on_error": ["裁剪完成领取", "纸间小铺裁纸"]
-	},
-	"进入剪纸页面": {
-		"recognition": {
-			"type": "OCR",
-			"param": {
-				"expected": ["1"],
-				"replace": [
-					["I", "1"],
-					["l", "1"],
-					["i", "1"]
-				],
-				"roi": [317, 841, 117, 50]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {"target_offset": [21, -59, -55, 7]}
-		},
-		"next": ["剪影裁诗确认", "[JumpBack]退出点击1popop"]
-	},
-	"剪影裁诗确认": {
-		"recognition": {
-			"type": "OCR",
-			"param": {
-				"expected": ["确认"],
-				"roi": [289, 1103, 133, 70]
+				"roi": [184, 969, 352, 177]
 			}
 		},
 		"action": {
@@ -307,64 +78,170 @@
 			"param": {}
 		},
 		"repeat": 5,
-		"timeout": 4000,
+		"post_delay": 2000,
+		"focus": "韶华宴岁每日领取成功!",
+		"next": []
+	},
+	"进入吉财临门": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"max_hit": 1,
+		"next": [
+			"吉财临门菜单",
+			"[JumpBack]退出点击空白继续popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]点击活动",
+			"[JumpBack]返回上一级页面",
+			"[JumpBack]导航回主页面"
+		]
+	},
+	"吉财临门菜单": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["event/吉财临门菜单.png"],
+				"roi": [10, 1179, 701, 79]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"pre_delay": 1000,
 		"post_delay": 3000,
-		"next": ["裁剪完成领取", "纸间小铺裁纸"]
+		"timeout": 10000,
+		"next": ["[JumpBack]吉财临门限时领取"]
 	},
-	"裁剪完成领取": {
+	"吉财临门限时领取": {
+		"recognition": {
+			"type": "Or",
+			"param": {
+				"any_of": [
+					{
+						"recognition": {
+							"type": "TemplateMatch",
+							"param": {
+								"template": ["event/吉财临门领取.png"],
+								"roi": [648, 137, 73, 1023],
+								"green_mask": true
+							}
+						}
+					},
+					{
+						"recognition": {
+							"type": "OCR",
+							"param": {
+								"expected": ["可领取", "可领"],
+								"roi": [648, 137, 73, 1023]
+							}
+						}
+					}
+				]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"timeout": 4000,
+		"post_delay": 2000,
+		"next": ["吉财临门页面", "[JumpBack]退出点击空白继续popop"]
+	},
+	"吉财临门页面": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["裁剪完成"],
-				"roi": [279, 256, 153, 83]
+				"expected": ["吉财临门", "吉财", "临门"],
+				"roi": [487, 20, 230, 133]
 			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"repeat": 3,
-		"repeat_delay": 1000,
-		"timeout": 4000,
-		"next": ["纸间小铺裁纸", "[JumpBack]退出获得奖励popop"]
+		}
 	},
-	"纸间小铺裁纸": {
+	"进入金叶盈福": {
 		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["红点（绿码）.png"],
-				"roi": [591, 785, 55, 73],
-				"green_mask": true
-			}
-		},
-		"action": {
-			"type": "Click",
+			"type": "DirectHit",
 			"param": {}
 		},
-		"next": ["开始裁剪"]
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"max_hit": 1,
+		"next": [
+			"金叶盈福菜单",
+			"[JumpBack]退出点击空白继续popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]点击活动",
+			"[JumpBack]返回上一级页面",
+			"[JumpBack]导航回主页面"
+		]
 	},
-	"开始裁剪": {
+	"金叶盈福菜单": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["开始裁剪"],
-				"roi": [243, 1034, 261, 100]
+				"expected": ["精彩活动", "精彩", "活动"],
+				"roi": [292, 1170, 421, 100]
 			}
 		},
 		"action": {
 			"type": "Click",
 			"param": {}
 		},
-		"repeat": 3,
-		"timeout": 4000,
-		"next": ["关闭裁纸页面"]
+		"timeout": 3000,
+		"next": ["确认在精彩活动页面"],
+		"on_error": ["金叶盈福菜单"]
 	},
-	"关闭裁纸页面": {
+	"确认在精彩活动页面": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["精彩活动", "精彩", "活动"],
+				"roi": [471, 41, 231, 94]
+			}
+		},
+		"next": ["点击金叶盈福", "[JumpBack]精彩活动向下滑"]
+	},
+	"点击金叶盈福": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["event/关闭裁纸页面.png"],
-				"roi": [492, 769, 131, 74]
+				"template": ["event/金叶盈福.png"],
+				"roi": [85, 157, 350, 986]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"timeout": 6000,
+		"next": ["金叶盈福免费摇福"]
+	},
+	"金叶盈福免费摇福": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["event/金叶盈福摇福.png"],
+				"roi": [227, 551, 270, 286]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"next": ["跳过摇一摇"]
+	},
+	"跳过摇一摇": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["跳过摇一摇", "摇一摇", "跳过"],
+				"roi": [551, 1085, 157, 69]
 			}
 		},
 		"action": {
@@ -372,5 +249,23 @@
 			"param": {}
 		},
 		"next": []
+	},
+	"精彩活动向下滑": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["精彩活动", "精彩", "活动"],
+				"roi": [471, 41, 231, 94]
+			}
+		},
+		"action": {
+			"type": "Swipe",
+			"param": {
+				"begin": [529, 541],
+				"end": [526, 417],
+				"duration": 500
+			}
+		},
+		"max_hit": 3
 	}
 }

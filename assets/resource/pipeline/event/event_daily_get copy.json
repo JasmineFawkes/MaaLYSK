@@ -1,0 +1,370 @@
+{
+	"进入限时活动1": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": [
+			"活动1菜单",
+			"[JumpBack]退出点击空白继续popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]点击活动",
+			"[JumpBack]返回上一级页面",
+			"[JumpBack]导航回主页面"
+		]
+	},
+	"活动1菜单": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["活动1", "韶华", "宴岁"],
+				"roi": [6, 1182, 696, 66]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"post_delay": 1000,
+		"repeat": 3,
+		"next": ["活动1限时领取"]
+	},
+	"活动1限时领取": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["经营任务", "任务"],
+				"roi": [596, 185, 118, 66]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"timeout": 4000,
+		"next": ["活动1一键领取"],
+		"post_delay": 2000,
+		"on_error": [
+			"活动2菜单",
+			"[JumpBack]退出点击空白继续popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]点击活动",
+			"[JumpBack]返回上一级页面"
+		]
+	},
+	"活动1一键领取": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["一键领取", "键领取", "领取"],
+				"roi": [184, 969, 352, 177]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"repeat": 5,
+		"post_delay": 2000,
+		"focus": "活动1每日领取成功!",
+		"next": [
+			"活动2菜单",
+			"[JumpBack]退出点击空白继续popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]点击活动",
+			"[JumpBack]返回上一级页面"
+		]
+	},
+	"活动2菜单": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["活动2", "吉财", "临门"],
+				"roi": [28, 1176, 656, 95]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"pre_delay": 1000,
+		"post_delay": 1000,
+		"timeout": 3000,
+		"next": ["活动2限时领取"],
+		"on_error": ["活动2菜单"]
+	},
+	"活动2限时领取": {
+		"recognition": {
+			"type": "Or",
+			"param": {
+				"any_of": [
+					{
+						"recognition": {
+							"type": "TemplateMatch",
+							"param": {
+								"template": ["task/daily/日常签到领取.png"],
+								"roi": [648, 137, 73, 1023]
+							}
+						}
+					},
+					{
+						"recognition": {
+							"type": "OCR",
+							"param": {
+								"expected": ["可领取", "领取"],
+								"roi": [648, 137, 73, 1023]
+							}
+						}
+					}
+				]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"timeout": 4000,
+		"post_delay": 2000,
+		"next": [
+			"活动3菜单",
+			"[JumpBack]退出点击空白继续popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]点击活动",
+			"[JumpBack]返回上一级页面"
+		]
+	},
+	"活动3菜单": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["活动3", "剪影", "裁诗"],
+				"roi": [235, 1180, 275, 81]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"timeout": 3000,
+		"next": ["[JumpBack]活动3限时领取"],
+		"on_error": ["活动3菜单"]
+	},
+	"活动3限时领取": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["event/剪影切换人物.png"],
+				"roi": [0, 269, 112, 129]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"max_hit": 5,
+		"next": [
+			"活动3_选择沈星回",
+			"活动3_选择黎深",
+			"活动3_选择祁煜",
+			"活动3_选择秦彻",
+			"活动3_选择夏以昼"
+		]
+	},
+	"活动3_选择沈星回": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["沈星回.png"],
+				"roi": [196, 193, 99, 106]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"enabled": true,
+		"max_hit": 1,
+		"timeout": 4000,
+		"focus": "沈星回剪纸",
+		"next": ["进入活动3页面"],
+		"on_error": ["活动3完成领取", "活动3-1裁纸"]
+	},
+	"活动3_选择黎深": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["黎深.png"],
+				"roi": [380, 411, 122, 114]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"enabled": true,
+		"max_hit": 1,
+		"timeout": 4000,
+		"focus": "黎深剪纸",
+		"next": ["进入活动3页面"],
+		"on_error": ["活动3完成领取", "活动3-1裁纸"]
+	},
+	"活动3_选择祁煜": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["祁煜.png"],
+				"roi": [186, 624, 118, 111]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"enabled": true,
+		"max_hit": 1,
+		"timeout": 4000,
+		"focus": "祁煜剪纸",
+		"next": ["进入活动3页面"],
+		"on_error": ["活动3完成领取", "活动3-1裁纸"]
+	},
+	"活动3_选择秦彻": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["秦彻.png"],
+				"roi": [422, 819, 110, 111]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"enabled": true,
+		"max_hit": 1,
+		"timeout": 4000,
+		"focus": "秦彻剪纸",
+		"next": ["进入活动3页面"],
+		"on_error": ["活动3完成领取", "活动3-1裁纸"]
+	},
+	"活动3_选择夏以昼": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["夏以昼.png"],
+				"roi": [202, 1013, 94, 106]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"enabled": true,
+		"max_hit": 1,
+		"timeout": 4000,
+		"focus": "夏以昼剪纸",
+		"next": ["进入活动3页面"],
+		"on_error": ["活动3完成领取", "活动3-1裁纸"]
+	},
+	"进入活动3页面": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["1"],
+				"replace": [
+					["I", "1"],
+					["l", "1"],
+					["i", "1"]
+				],
+				"roi": [317, 841, 117, 50]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {"target_offset": [21, -59, -55, 7]}
+		},
+		"next": ["活动3确认", "[JumpBack]退出点击1popop"]
+	},
+	"活动3确认": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["确认"],
+				"roi": [289, 1103, 133, 70]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"repeat": 5,
+		"timeout": 4000,
+		"post_delay": 3000,
+		"next": ["活动3完成领取", "活动3-1裁纸"]
+	},
+	"活动3完成领取": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["裁剪完成"],
+				"roi": [279, 256, 153, 83]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"repeat": 3,
+		"repeat_delay": 1000,
+		"timeout": 4000,
+		"next": ["活动3-1裁纸", "[JumpBack]退出获得奖励popop"]
+	},
+	"活动3-1裁纸": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["红点（绿码）.png"],
+				"roi": [591, 785, 55, 73],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"next": ["开始活动3裁纸"]
+	},
+	"开始活动3裁纸": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["开始活动3裁纸"],
+				"roi": [243, 1034, 261, 100]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"repeat": 3,
+		"timeout": 4000,
+		"next": ["关闭活动3裁纸页面"]
+	},
+	"关闭活动3裁纸页面": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["event/关闭裁纸页面.png"],
+				"roi": [492, 769, 131, 74]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"next": []
+	}
+}
