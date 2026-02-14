@@ -265,7 +265,7 @@
 			"entry": "进入限时活动",
 			"default_check": false,
 			"option": ["韶华宴岁领取", "吉财临门领取", "金叶盈福领取"],
-			"description": "[color:orange]当前版本：韶华宴岁、吉财临门[/color]\n\n限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画"
+			"description": "[color:orange]当前版本：韶华宴岁、吉财临门、金叶盈福[/color]\n\n限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画"
 		},
 		{
 			"name": " 🏅喵喵牌限时抽卡",
