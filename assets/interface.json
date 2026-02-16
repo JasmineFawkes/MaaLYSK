@@ -48,7 +48,7 @@
 			"name": "♻主页面切换账号",
 			"entry": "进入主页面切换账号",
 			"default_check": false,
-			"option": ["游戏版本", "切换后账号"]
+			"option": ["游戏版本", "账号前3位"]
 		},
 		{
 			"name": "🍰领日常体力",
@@ -96,7 +96,7 @@
 			"entry": "进入零点追踪_豆佬",
 			"default_check": true,
 			"option": ["选择零点追踪关卡难度", "选择零点追踪次数"],
-			"description": "目前可以选择难度1~9，追击1次或10次。"
+			"description": "目前可以选择难度1~9，追击至体力耗尽/1次或10次。"
 		},
 		{
 			"name": "⚔️零点追踪哈特",
@@ -131,7 +131,7 @@
 			"entry": "日常_进入芯核狩猎",
 			"default_check": true,
 			"option": ["选择日常芯核狩猎次数", "选择日常芯核狩猎颜色顺序"],
-			"description": "自动选择当天开放狩猎的芯核,全部开放时顺序为红绿、黄紫、粉蓝。\n\n支持芯核达到上限时自动前往清理（需提前勾选好低等级自动弃置芯核）。\n\n目前仅支持自动狩猎一次。"
+			"description": "自动选择当天开放狩猎的芯核,全部开放时顺序为红绿、黄紫、粉蓝。\n\n支持芯核达到上限时自动前往清理（需提前勾选好低等级自动弃置芯核）。"
 		},
 		{
 			"name": "🍂日常思念升级一次",
@@ -338,7 +338,7 @@
 				}
 			]
 		},
-		"切换后账号": {
+		"账号前3位": {
 			"type": "input",
 			"inputs": [
 				{
@@ -351,39 +351,10 @@
 			],
 			"pipeline_override": {
 				"选择登录账号": {
-					"expected": ["{account}"]
-				}
-			}
-		},
-		"账号前3位": {
-			"type": "input",
-			"inputs": [
-				{
-					"name": "account",
-					"label": "帐号前3位中的任意内容",
-					"pipeline_type": "string",
-					"default": "xxx"
-				}
-			],
-			"pipeline_override": {
-				"选择登录账号": {
-					"expected": ["{account}"]
-				}
-			}
-		},
-		"新账号前3位": {
-			"type": "input",
-			"inputs": [
-				{
-					"name": "account",
-					"label": "新帐号前3位中的任意内容",
-					"pipeline_type": "string",
-					"default": "xxx"
-				}
-			],
-			"pipeline_override": {
-				"选择登录账号": {
-					"expected": ["{account}"]
+					"expected": ["{account}"],
+					"focus": {
+						"Node.Action.Succeeded": "登录账号：{account}"
+					}
 				}
 			}
 		},
