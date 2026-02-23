@@ -166,7 +166,7 @@
 			"entry": "进入商城周常领取",
 			"default_check": false,
 			"option": ["心砂商店是否购买"],
-			"description": "领取每周礼包,快乐小铺的极空许愿券和辉曜磁石"
+			"description": "领取每周礼包,快乐小铺的极空许愿券和辉曜磁石，可以选择是否购买心砂商店的许愿券和加速魔方"
 		},
 		{
 			"name": "💎年卡领取",
@@ -262,6 +262,19 @@
 			"default_check": false,
 			"option": ["韶华宴岁领取", "吉财临门领取", "金叶盈福领取"],
 			"description": "[color:orange]当前版本：韶华宴岁、吉财临门、金叶盈福[/color]\n\n限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画"
+		},
+		{
+			"name": "✨限时活动读剧情",
+			"entry": "进入活动读剧情",
+			"default_check": false,
+			"description": "[color:orange]当前版本：韶华宴岁[/color]\n\n限时活动读剧情，需要提前进入一次页面以防止有动画"
+		},
+		{
+			"name": "🌈限时活动小游戏",
+			"entry": "进入限时活动小游戏",
+			"default_check": false,
+			"option": ["韶华宴岁小游戏模式"],
+			"description": "[color:orange]当前版本：韶华宴岁[/color]\n\n限时活动小游戏，需要提前进入一次页面以防止有动画"
 		},
 		{
 			"name": " 🏅喵喵牌限时抽卡",
@@ -880,14 +893,8 @@
 				{
 					"name": "No",
 					"pipeline_override": {
-						"小铺辉耀磁石领取": {
-							"next": [
-								"是否商城页面",
-								"[JumpBack]退出点击（上限）popop"
-							]
-						},
-						"确认进入快乐小铺": {
-							"on_error": ["stop"]
+						"进入心砂商店": {
+							"enabled": false
 						}
 					}
 				},
@@ -895,19 +902,8 @@
 					"name": "Yes",
 					"option": ["购买极空许愿券", "购买加速魔方"],
 					"pipeline_override": {
-						"小铺辉耀磁石领取": {
-							"next": [
-								"进入心砂商店",
-								"[JumpBack]滑动寻找小铺",
-								"[JumpBack]退出点击（上限）popop"
-							]
-						},
-						"确认进入快乐小铺": {
-							"on_error": [
-								"进入心砂商店",
-								"[JumpBack]滑动寻找小铺",
-								"[JumpBack]退出点击（上限）popop"
-							]
+						"进入心砂商店": {
+							"enabled": true
 						}
 					}
 				}
@@ -1713,6 +1709,27 @@
 					"pipeline_override": {
 						"进入金叶盈福": {
 							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"韶华宴岁小游戏模式": {
+			"type": "select",
+			"cases": [
+				{
+					"name": "聚客探听",
+					"pipeline_override": {
+						"进入限时活动小游戏": {
+							"next": ["进入聚客探听"]
+						}
+					}
+				},
+				{
+					"name": "邀约花笺",
+					"pipeline_override": {
+						"进入限时活动小游戏": {
+							"next": ["进入邀约花笺"]
 						}
 					}
 				}
