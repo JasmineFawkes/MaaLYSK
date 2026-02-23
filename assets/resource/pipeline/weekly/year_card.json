@@ -42,6 +42,9 @@
 			"param": {}
 		},
 		"timeout": 5000,
+		"focus": {
+			"Node.PipelineNode.Failed": "[color:red]没有可领取的年卡奖励[/color]"
+		},
 		"next": ["年卡领取"]
 	},
 	"年卡领取": {
@@ -55,6 +58,9 @@
 		"action": {
 			"type": "Click",
 			"param": {}
+		},
+		"focus": {
+			"Node.Action.Succeeded": "年卡奖励领取成功"
 		},
 		"next": ["stop"]
 	}
