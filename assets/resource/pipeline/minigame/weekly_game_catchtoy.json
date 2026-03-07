@@ -151,16 +151,17 @@
 		"pre_delay": 500,
 		"post_delay": 1000,
 		"post_wait_freezes": 500,
+		"rate_limit": 1000,
 		"next": ["确认选好平衡捕手", "[JumpBack]选择平衡捕手"]
 	},
 	"确认选好平衡捕手": {
 		"recognition": {
 			"type": "ColorMatch",
 			"param": {
-				"lower": [187, 106, 89],
-				"upper": [207, 126, 109],
+				"upper": [238, 209, 201],
+				"lower": [201, 127, 112],
 				"roi": [350, 877, 269, 93],
-				"count": 500
+				"count": 400
 			}
 		},
 		"action": {
@@ -174,13 +175,49 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": ["minigame/catchtoy/平衡捕手.png"],
-				"roi": [385, 904, 188, 45]
+				"roi": [350, 877, 269, 93]
 			}
 		},
 		"action": {
 			"type": "Click",
-			"param": {"target": [483, 919, 21, 13]}
+			"param": {
+				"target_offset": [71, 13, -132, -23]
+			}
 		},
+		"repeat": 2,
+		"next": []
+	},
+	"确认选好三爪标准": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"upper": [238, 209, 201],
+				"lower": [201, 127, 112],
+				"roi": [82, 880, 270, 94],
+				"count": 400
+			}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"next": ["娃娃机是否上限", "[JumpBack]娃娃机出发"]
+	},
+	"选择三爪标准": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["minigame/catchtoy/三爪标准.png"],
+				"roi": [82, 880, 270, 94]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target_offset": [71, 13, -132, -23]
+			}
+		},
+		"repeat": 2,
 		"next": []
 	},
 	"娃娃机是否上限": {
