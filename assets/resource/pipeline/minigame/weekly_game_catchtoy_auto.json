@@ -29,7 +29,7 @@
 				"lower": [94, 89, 117],
 				"upper": [114, 109, 137],
 				"roi": [242, 610, 274, 68],
-				"count": 900
+				"count": 750
 			}
 		},
 		"action": {
@@ -92,25 +92,6 @@
 		"focus": {
 			"Node.Action.Succeeded": "抓娃娃选择下面选项"
 		},
-		"next": ["我开始抓娃娃", "男主抓娃娃"]
-	},
-	"让我抓娃娃_下_TM": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["minigame/秦彻让我抓.png"],
-				"roi": [221, 57, 247, 325]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {
-				"target": [317, 636, 97, 19]
-			}
-		},
-		"repeat": 2,
-		"repeat_delay": 500,
-		"post_delay": 2000,
 		"next": ["我开始抓娃娃", "男主抓娃娃"]
 	},
 	"我开始抓娃娃": {
