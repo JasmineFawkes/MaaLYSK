@@ -41,7 +41,21 @@
 			"type": "Click",
 			"param": {}
 		},
-		"next": ["[JumpBack]任务收尾领取", "日常签到准备"]
+		"timeout": 5000,
+		"next": ["[JumpBack]进入每日任务", "进入每日签到"]
+	},
+	"进入每日任务": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"max_hit": 1,
+		"timeout": 5000,
+		"next": ["任务收尾领取"]
 	},
 	"任务收尾领取": {
 		"recognition": {
@@ -60,7 +74,7 @@
 			"Node.Action.Succeeded": "日程任务领取成功"
 		},
 		"timeout": 5000,
-		"repeat": 10,
+		"repeat": 8,
 		"next": [
 			"日程活跃度100",
 			"日程活跃度未满100",
@@ -110,6 +124,19 @@
 		},
 		"next": []
 	},
+	"进入每日签到": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "DoNothing",
+			"param": {}
+		},
+		"max_hit": 1,
+		"timeout": 5000,
+		"next": ["日常签到准备"]
+	},
 	"日常签到准备": {
 		"recognition": {
 			"type": "OCR",
@@ -125,7 +152,8 @@
 		"next": [
 			"日常签到页面确认",
 			"[JumpBack]日常签到准备",
-			"[JumpBack]退出点击（上限）popop"
+			"[JumpBack]退出点击（上限）popop",
+			"[JumpBack]退出获得奖励popop"
 		]
 	},
 	"日常签到页面确认": {
@@ -141,7 +169,12 @@
 			"param": {}
 		},
 		"timeout": 10000,
-		"next": ["日常签到领取", "[JumpBack]月礼包点点"]
+		"next": [
+			"日常签到领取",
+			"[JumpBack]月礼包点点",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]退出点击（上限）popop"
+		]
 	},
 	"日常签到领取": {
 		"recognition": {
@@ -178,7 +211,9 @@
 		},
 		"action": {
 			"type": "Click",
-			"param": {"target_offset": [9, 15, -25, -22]}
+			"param": {
+				"target_offset": [9, 15, -25, -22]
+			}
 		},
 		"focus": {
 			"Node.Action.Succeeded": "月签到礼包领取成功!"
