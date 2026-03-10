@@ -39,6 +39,23 @@
 		},
 		"next": ["返回等待"]
 	},
+	"退出兑换码页面popop": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": "兑换",
+				"replace": [["兌换", "兑换"]],
+				"roi": [255, 599, 196, 92]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target": [112, 1140, 3, 3]
+			}
+		},
+		"next": ["返回等待"]
+	},
 	"退出喵喵牌确定popop": {
 		"recognition": {
 			"type": "OCR",

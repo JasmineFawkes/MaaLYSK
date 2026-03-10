@@ -13,6 +13,7 @@
 			"[JumpBack]导航回主页面（商城）",
 			"[JumpBack]导航回主页面（芯核分解）",
 			"[JumpBack]退出剧情回顾popop",
+			"[JumpBack]退出兑换码页面popop",
 			"[JumpBack]退出喵喵牌确定popop",
 			"[JumpBack]退出娃娃机popop",
 			"[JumpBack]退出获得奖励popop",
@@ -41,6 +42,7 @@
 			"导航回主页面（商城）",
 			"导航回主页面（芯核分解）",
 			"退出剧情回顾popop",
+			"退出兑换码页面popop",
 			"退出喵喵牌确定popop",
 			"退出娃娃机popop",
 			"退出获得奖励popop",
@@ -60,6 +62,7 @@
 		"timeout": 2000,
 		"next": [
 			"退出剧情回顾popop",
+			"退出兑换码页面popop",
 			"退出喵喵牌确定popop",
 			"退出娃娃机popop",
 			"退出获得奖励popop",

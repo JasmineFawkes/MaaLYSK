@@ -57,6 +57,7 @@
 			"type": "OCR",
 			"param": {
 				"expected": ["兑换", "兑换码"],
+				"replace": [["兌换", "兑换码"]],
 				"roi": [439, 1019, 199, 85]
 			}
 		},
@@ -71,6 +72,7 @@
 			"type": "OCR",
 			"param": {
 				"expected": "兑换",
+				"replace": [["兌换", "兑换"]],
 				"roi": [255, 599, 196, 92]
 			}
 		},
@@ -86,7 +88,7 @@
 		"action": {
 			"type": "InputText",
 			"param": {
-				"input_text": "2026WOMENSDAY"
+				"input_text": "xxx"
 			}
 		},
 		"next": ["兑换码_点击兑换"]
@@ -96,6 +98,7 @@
 			"type": "OCR",
 			"param": {
 				"expected": "兑换",
+				"replace": [["兌换", "兑换"]],
 				"roi": [255, 599, 196, 92]
 			}
 		},
