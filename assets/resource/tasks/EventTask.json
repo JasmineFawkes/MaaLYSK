@@ -1,0 +1,125 @@
+{
+	"task": [
+		{
+			"name": "💫免费福利签到",
+			"entry": "进入福利签到",
+			"default_check": false,
+			"description": "[color:orange]当前签到：灯宵映礼[/color]\n\n如果有其它活动,第一天记得把其他活动剧情点掉,不然会卡住"
+		},
+		{
+			"name": "🛍️限时活动商城领取",
+			"entry": "进入活动商城领取",
+			"default_check": false,
+			"description": "[color:orange]当前版本：目前关闭中[/color]"
+		},
+		{
+			"name": "🌟限时活动每日领取",
+			"entry": "进入限时活动",
+			"default_check": false,
+			//"option": ["韶华宴岁领取", "吉财临门领取", "金叶盈福领取"],
+			"description": "[color:orange]当前版本：步步倾你-祁煜0306生日快乐[/color]\n\n限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画"
+		},
+		{
+			"name": "✨限时活动读剧情",
+			"entry": "进入活动读剧情",
+			"default_check": false,
+			"description": "[color:orange]当前版本：目前关闭中[/color]\n\n限时活动读剧情，需要提前进入一次页面以防止有动画"
+		},
+		{
+			"name": "🌈限时活动小游戏",
+			"entry": "进入限时活动小游戏",
+			"default_check": false,
+			"option": ["韶华宴岁小游戏模式"],
+			"description": "[color:orange]当前版本：目前关闭中[/color]\n\n限时活动小游戏，需要提前进入一次页面以防止有动画"
+		}
+	],
+	"option": {
+		"韶华宴岁领取": {
+			"type": "switch",
+			"description": "领经营任务奖励",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"进入韶华宴岁": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"进入韶华宴岁": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"吉财临门领取": {
+			"type": "switch",
+			"description": "领所有可领的,识别时间比较长,耐心等待",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"进入吉财临门": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"进入吉财临门": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"金叶盈福领取": {
+			"type": "switch",
+			"description": "免费摇福",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"进入金叶盈福": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"进入金叶盈福": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"韶华宴岁小游戏模式": {
+			"type": "select",
+			"cases": [
+				{
+					"name": "聚客探听",
+					"pipeline_override": {
+						"进入限时活动小游戏": {
+							"next": ["进入聚客探听"]
+						}
+					}
+				},
+				{
+					"name": "邀约花笺",
+					"pipeline_override": {
+						"进入限时活动小游戏": {
+							"next": ["进入邀约花笺"]
+						}
+					}
+				}
+			]
+		}
+	}
+}

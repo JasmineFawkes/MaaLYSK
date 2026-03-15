@@ -1,0 +1,16 @@
+{
+	"task": [
+		{
+			"name": "🏅喵喵牌限时抽卡",
+			"entry": "进入限时抽喵喵牌",
+			"default_check": false,
+			"description": "把所有的限时喵喵牌抽卡次数都用掉\n\n[color:red]deadline前记得检查有没有漏做[/color]"
+		},
+		{
+			"name": "🃏喵喵牌抽卡",
+			"entry": "进入喵喵牌抽卡",
+			"default_check": false,
+			"description": "在喵喵牌抽卡页面启动，自己找没有9/9的徽章并进行抽卡，限时喵喵牌期间无法使用\n\n[color:red]目前关闭中，请不要勾选[/color]"
+		}
+	]
+}

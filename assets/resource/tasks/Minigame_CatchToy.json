@@ -1,0 +1,216 @@
+{
+	"task": [
+		{
+			"name": "🎮周常娃娃机",
+			"entry": "进入娃娃机",
+			"default_check": false,
+			"option": [
+				"娃娃机模式选择",
+				"沈星回抓不抓",
+				"黎深抓不抓",
+				"祁煜抓不抓",
+				"秦彻抓不抓",
+				"夏以昼抓不抓"
+			],
+			"description": "1、可选秒退、自己抓二爪、让他抓三爪模式\n\n2、抓二爪娃娃机目前可顺利运行，遇到男主直接开始抓了会尝试切换成自己抓（点名小鱼！）。\n\n可以自定义二爪娃娃机按钮按下的时长\n\n3、让他抓三爪娃娃时如果有选娃娃环节，会优先选择未获得的娃娃，开局是我在抓时会直接按下按钮然后请求切换\n\n[color:red]由于模拟器卡顿、娃娃弹跳等情况，不保证每局都抓4-5只，觉得概率低的自行抓取[/color]"
+		}
+	],
+	"option": {
+		"娃娃机模式选择": {
+			"type": "select",
+			"cases": [
+				{
+					"name": "秒退",
+					"description": "进入娃娃机就退出",
+					"pipeline_override": {
+						"娃娃机游戏中页面": {
+							"next": ["娃娃机返回"]
+						}
+					}
+				},
+				{
+					"name": "过剧情抓二爪娃娃",
+					"description": "抓二爪娃娃,由于卡顿不保证每次都抓到",
+					"option": ["蓝色按钮按下时间", "绿色按钮按下时间"],
+					"pipeline_override": {
+						"进入娃娃机页面": {
+							"next": [
+								"确认选好平衡捕手",
+								"[JumpBack]选择平衡捕手"
+							]
+						},
+						"娃娃机游戏中页面": {
+							"next": ["点击自动"]
+						}
+					}
+				},
+				{
+					"name": "让他抓三爪娃娃",
+					"description": "让男主抓三爪娃娃,可以选抓什么娃娃时优先选未获取的",
+					"pipeline_override": {
+						"进入娃娃机页面": {
+							"next": [
+								"确认选好三爪标准",
+								"[JumpBack]选择三爪标准"
+							]
+						},
+						"娃娃机游戏中页面": {
+							"next": ["点击自动_三爪"]
+						}
+					}
+				}
+			]
+		},
+		"绿色按钮按下时间": {
+			"type": "input",
+			"inputs": [
+				{
+					"name": "green_duration",
+					"description": "自定义绿色按钮长按时间",
+					"label": "绿色按钮按下时间",
+					"pipeline_type": "int",
+					"default": "320"
+				}
+			],
+			"pipeline_override": {
+				"抓娃娃绿色按钮": {
+					"action": {
+						"type": "LongPress",
+						"param": {
+							"duration": "{green_duration}",
+							"target": [159, 1147, 11, 8]
+						}
+					}
+				}
+			}
+		},
+		"蓝色按钮按下时间": {
+			"type": "input",
+			"inputs": [
+				{
+					"name": "blue_duration",
+					"description": "自定义蓝色按钮长按时间",
+					"label": "蓝色按钮按下时间",
+					"pipeline_type": "int",
+					"default": "580"
+				}
+			],
+			"pipeline_override": {
+				"抓娃娃蓝色按钮": {
+					"action": {
+						"type": "LongPress",
+						"param": {
+							"duration": "{blue_duration}",
+							"target": [323, 1146, 13, 14]
+						}
+					}
+				}
+			}
+		},
+		"沈星回抓不抓": {
+			"type": "switch",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"娃娃机_选择沈星回": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"娃娃机_选择沈星回": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"黎深抓不抓": {
+			"type": "switch",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"娃娃机_选择黎深": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"娃娃机_选择黎深": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"祁煜抓不抓": {
+			"type": "switch",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"娃娃机_选择祁煜": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"娃娃机_选择祁煜": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"秦彻抓不抓": {
+			"type": "switch",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"娃娃机_选择秦彻": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"娃娃机_选择秦彻": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		},
+		"夏以昼抓不抓": {
+			"type": "switch",
+			"cases": [
+				{
+					"name": "Yes",
+					"pipeline_override": {
+						"娃娃机_选择夏以昼": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "No",
+					"pipeline_override": {
+						"娃娃机_选择夏以昼": {
+							"enabled": false
+						}
+					}
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,14 @@
+{
+	"task": [
+		{
+			"name": "🛍️商城日常领取",
+			"entry": "进入商城日常领取",
+			"default_check": true
+		},
+		{
+			"name": "💰月卡领取",
+			"entry": "进入月卡领取",
+			"default_check": false
+		}
+	]
+}

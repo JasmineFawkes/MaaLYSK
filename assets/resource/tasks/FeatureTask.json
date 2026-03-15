@@ -1,0 +1,42 @@
+{
+	"task": [
+		{
+			"name": "🎁使用兑换码",
+			"entry": "进入兑换码兑换",
+			"default_check": false,
+			"controller": ["ADB模拟器"],
+			"description": "不支持PlayCover,Playcover仅能手动输入兑换码",
+			"option": ["输入当前兑换码"]
+		},
+		{
+			"name": "✉️邮箱领取",
+			"entry": "进入邮箱领取",
+			"default_check": false
+		},
+		{
+			"name": "📖自动读剧情",
+			"entry": "自动过剧情",
+			"default_check": false,
+			"description": "进入剧情后在剧情页面启动，无法过有选项的剧情"
+		}
+	],
+	"option": {
+		"输入当前兑换码": {
+			"type": "input",
+			"inputs": [
+				{
+					"name": "CDKey",
+					"description": "填写要进行兑换的兑换码",
+					"label": "输入兑换码",
+					"pipeline_type": "string",
+					"default": "xxx"
+				}
+			],
+			"pipeline_override": {
+				"输入兑换码": {
+					"input_text": "{CDKey}"
+				}
+			}
+		}
+	}
+}

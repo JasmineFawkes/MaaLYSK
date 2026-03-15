@@ -1,0 +1,16 @@
+{
+	"task": [
+		{
+			"name": "🗓️周常收尾",
+			"entry": "进入周常收尾",
+			"default_check": false,
+			"description": "周常任务领取\n\n[color:red]任务完成后,请自行检查是否领取完毕[/color]"
+		},
+		{
+			"name": "🔗周常分享3次",
+			"entry": "进入周常分享",
+			"default_check": false,
+			"description": "周常分享\n\n[color:orange]分享需要在模拟器搜索下个微信才能用（下好就行不用登录）[/color]\n\n[color:red]目前灰度测试中，最好不要勾选[/color]"
+		}
+	]
+}
