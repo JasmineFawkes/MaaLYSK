@@ -140,12 +140,15 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": ["fight/自动追击1次.png"],
-				"roi": [176, 1134, 64, 110]
+				"roi": [145, 1141, 109, 99]
 			}
 		},
 		"action": {
 			"type": "Click",
 			"param": {}
+		},
+		"focus": {
+			"Node.Action.Succeeded": "追击1次"
 		},
 		"next": ["[JumpBack]退出点击（上限）popop", "stop"]
 	},
@@ -161,6 +164,9 @@
 			"type": "Click",
 			"param": {}
 		},
+		"focus": {
+			"Node.Action.Succeeded": "追击10次"
+		},
 		"next": ["[JumpBack]退出点击（上限）popop", "stop"]
 	},
 	"芯核自动追击耗尽": {
@@ -174,6 +180,9 @@
 		"action": {
 			"type": "Click",
 			"param": {}
+		},
+		"focus": {
+			"Node.Action.Succeeded": "自动追击体力耗尽"
 		},
 		"next": [
 			"体力耗尽不再继续",
