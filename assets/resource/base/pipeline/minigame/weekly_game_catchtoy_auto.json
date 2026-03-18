@@ -373,9 +373,8 @@
 			}
 		},
 		"pre_delay": 500,
-		"post_delay": 10000,
-		"timeout": 5000,
-		"next": ["过剧情", "娃娃机对话_上_我来抓", "娃娃机对话_下_我来抓"]
+		"post_delay": 15000,
+		"next": []
 	},
 	"男主抓娃娃": {
 		"recognition": {
