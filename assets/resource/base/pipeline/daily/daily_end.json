@@ -19,7 +19,7 @@
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["任务", "任", "务"],
+				"expected": ["任务"],
 				"roi": [74, 1175, 125, 79]
 			}
 		},
@@ -27,6 +27,8 @@
 			"type": "Click",
 			"param": {}
 		},
+		"repeat": 2,
+		"repeat_delay": 200,
 		"next": ["日常收尾点击每日"]
 	},
 	"日常收尾点击每日": {
@@ -54,7 +56,7 @@
 			"param": {}
 		},
 		"max_hit": 1,
-		"timeout": 5000,
+		"timeout": 6000,
 		"next": ["任务收尾领取"],
 		"on_error": ["日程活跃度100", "日程活跃度未满100"]
 	},
@@ -63,7 +65,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": ["一键领取.png"],
-				"roi": [483, 1103, 136, 55]
+				"roi": [432, 1066, 243, 115]
 			}
 		},
 		"action": {
@@ -79,9 +81,31 @@
 		"timeout": 5000,
 		"repeat": 10,
 		"repeat_delay": 500,
-		"next": ["[JumpBack]退出获得奖励popop", "日程活跃度100"],
+		"next": [
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]日程活跃度100但没领完",
+			"日程活跃度100"
+		],
 		"on_error": ["日程活跃度未满100"]
 	},
+	"日程活跃度100但没领完": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["task/daily/月礼包领取.png"],
+				"roi": [565, 249, 76, 79]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target": [529, 1120, 42, 23]
+			}
+		},
+		"post_delay": 500,
+		"next": []
+	},
+
 	"日程活跃度100": {
 		"recognition": {
 			"type": "TemplateMatch",
@@ -120,7 +144,11 @@
 		"max_hit": 1,
 		"post_delay": 500,
 		"focus": {
-			"Node.Recognition.Succeeded": "[color:red]活跃值未满100，请手动完成[/color]"
+			"Node.Recognition.Succeeded": {
+				"content": "[color:red]活跃值未满100，请手动完成[/color]",
+				"display": "log"
+			},
+			"toast": "活跃值未满100，请手动检查"
 		},
 		"next": []
 	},
@@ -133,7 +161,6 @@
 			"type": "DoNothing",
 			"param": {}
 		},
-		"max_hit": 1,
 		"timeout": 5000,
 		"next": ["日常签到准备"]
 	},
@@ -151,30 +178,34 @@
 		},
 		"next": [
 			"日常签到页面确认",
-			"[JumpBack]日常签到准备",
-			"[JumpBack]退出点击（上限）popop",
-			"[JumpBack]退出获得奖励popop"
-		]
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]退出点击（上限）popop"
+		],
+		"on_error": ["日常签到准备"]
 	},
 	"日常签到页面确认": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
 				"expected": ["签到", "签", "到"],
-				"roi": [579, 50, 113, 59]
+				"roi": [534, 17, 179, 124]
 			}
 		},
 		"action": {
 			"type": "DoNothing",
 			"param": {}
 		},
+		"focus": {
+			"Node.PipelineNode.Failed": {
+				"content": "[color:red]日常签到已领过或领取失败,请检查[/color]",
+				"display": ["log"]
+			}
+		},
+
 		"timeout": 10000,
-		"next": [
-			"日常签到领取",
-			"[JumpBack]月礼包点点",
-			"[JumpBack]退出获得奖励popop",
-			"[JumpBack]退出点击（上限）popop"
-		]
+		"rate_limit": 500,
+		"next": ["日常签到领取", "[JumpBack]退出获得奖励popop"],
+		"on_error": ["月礼包点点"]
 	},
 	"日常签到领取": {
 		"recognition": {
