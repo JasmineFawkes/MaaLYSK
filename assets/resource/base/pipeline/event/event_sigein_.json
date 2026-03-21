@@ -10,7 +10,7 @@
 		},
 		"next": [
 			"点击精彩活动",
-			"点击签到_灯宵映礼",
+			"进入签到_心动挚礼",
 			"[JumpBack]点击活动",
 			"[JumpBack]返回上一级页面",
 			"[JumpBack]导航回主页面"
@@ -28,7 +28,7 @@
 			"type": "Click",
 			"param": {}
 		},
-		"next": ["进入签到_灯宵映礼", "[JumpBack]精彩活动向下滑"]
+		"next": ["进入签到_心动挚礼", "[JumpBack]精彩活动向下滑"]
 	},
 	"进入签到_灯宵映礼": {
 		"recognition": {
@@ -68,6 +68,20 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": ["event/十日与你_祁煜驭夜灯阑.png"],
+				"roi": [85, 157, 350, 986]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"next": ["[JumpBack]退出点击（上限）popop", "stop"]
+	},
+	"进入签到_心动挚礼": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["event/心动挚礼_祁煜共潮生.png"],
 				"roi": [85, 157, 350, 986]
 			}
 		},
