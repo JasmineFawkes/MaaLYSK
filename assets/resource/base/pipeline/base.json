@@ -2,6 +2,7 @@
 	"stop": {
 		"action": "StopTask"
 	},
+	"null": {},
 	"点击日程": {
 		"recognition": {
 			"type": "TemplateMatch",
