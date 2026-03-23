@@ -207,10 +207,28 @@
 	},
 	"零点自动追击体力耗尽": {
 		"recognition": {
-			"type": "TemplateMatch",
+			"type": "Or",
 			"param": {
-				"template": ["fight/自动追击10次.png"],
-				"roi": [326, 910, 76, 173]
+				"any_of": [
+					{
+						"recognition": {
+							"type": "TemplateMatch",
+							"param": {
+								"template": ["fight/自动追击10次.png"],
+								"roi": [326, 910, 76, 173]
+							}
+						}
+					},
+					{
+						"recognition": {
+							"type": "TemplateMatch",
+							"param": {
+								"template": ["fight/自动追击1次.png"],
+								"roi": [165, 919, 108, 98]
+							}
+						}
+					}
+				]
 			}
 		},
 		"action": {
