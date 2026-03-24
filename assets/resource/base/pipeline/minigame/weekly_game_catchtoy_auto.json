@@ -328,7 +328,8 @@
 		},
 		"pre_delay": 1000,
 		"post_delay": 1900,
-		"next": ["抓娃娃蓝色按钮"]
+		"next": ["抓娃娃蓝色按钮"],
+		"on_error": ["null"]
 	},
 	"抓娃娃蓝色按钮": {
 		"recognition": {
@@ -351,7 +352,8 @@
 		},
 		"pre_delay": 2000,
 		"post_delay": 1000,
-		"next": ["抓娃娃粉色按钮"]
+		"next": ["抓娃娃粉色按钮"],
+		"on_error": ["null"]
 	},
 	"抓娃娃粉色按钮": {
 		"recognition": {
