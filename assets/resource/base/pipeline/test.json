@@ -36,11 +36,6 @@
 			"type": "DoNothing",
 			"param": {}
 		},
-		"next": [
-			"娃娃机点击空白继续",
-			"男主抓娃娃",
-			"[JumpBack]过剧情",
-			"[JumpBack]抓娃娃蓝色按钮"
-		]
+		"next": []
 	}
 }
