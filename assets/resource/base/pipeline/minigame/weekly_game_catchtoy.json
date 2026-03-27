@@ -157,7 +157,8 @@
 		"post_delay": 1000,
 		"post_wait_freezes": 500,
 		"rate_limit": 1000,
-		"next": ["确认选好平衡捕手", "[JumpBack]选择平衡捕手"]
+		"next": ["确认选好平衡捕手", "[JumpBack]选择平衡捕手"],
+		"on_error": ["null"]
 	},
 	"确认选好平衡捕手": {
 		"recognition": {

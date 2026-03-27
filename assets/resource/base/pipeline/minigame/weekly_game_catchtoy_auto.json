@@ -81,7 +81,7 @@
 		"action": {
 			"type": "Click",
 			"param": {
-				"target": [309, 560, 96, 18]
+				"target": [346, 564, 16, 6]
 			}
 		},
 		"repeat": 2,
@@ -90,7 +90,8 @@
 		"focus": {
 			"Node.Action.Succeeded": "抓娃娃选择上面选项"
 		},
-		"next": ["我开始抓娃娃", "尝试抢男主娃娃"]
+		"next": ["我开始抓娃娃", "尝试抢男主娃娃"],
+		"on_error": ["让我抓娃娃_上"]
 	},
 	"让我抓娃娃_下": {
 		"recognition": {
@@ -103,7 +104,7 @@
 		"action": {
 			"type": "Click",
 			"param": {
-				"target": [317, 636, 97, 19]
+				"target": [353, 643, 15, 6]
 			}
 		},
 		"repeat": 2,
@@ -112,7 +113,8 @@
 		"focus": {
 			"Node.Action.Succeeded": "抓娃娃选择下面选项"
 		},
-		"next": ["我开始抓娃娃", "尝试抢男主娃娃"]
+		"next": ["我开始抓娃娃", "尝试抢男主娃娃"],
+		"on_error": ["让我抓娃娃_下"]
 	},
 	"我开始抓娃娃": {
 		"recognition": {
@@ -123,7 +125,8 @@
 					"minigame/catchtoy/抓娃娃蓝色按钮1.png"
 				],
 				"roi": [253, 1095, 149, 139],
-				"threshold": 0.6
+				"threshold": 0.6,
+				"order_by": "Score"
 			}
 		},
 		"action": {
@@ -231,7 +234,8 @@
 					"minigame/catchtoy/抓娃娃蓝色按钮1.png"
 				],
 				"roi": [253, 1095, 149, 139],
-				"threshold": 0.6
+				"threshold": 0.6,
+				"order_by": "Score"
 			}
 		},
 		"action": {
@@ -258,6 +262,7 @@
 		"focus": {
 			"Node.Action.Succeeded": "复位一下"
 		},
+		"post_delay": 1500,
 		"next": ["娃娃机复位按钮确定"],
 		"on_error": ["点击娃娃机复位按钮"]
 	},
@@ -273,6 +278,7 @@
 			"type": "Click",
 			"param": {}
 		},
+		"post_delay": 1500,
 		"next": ["我开始抓娃娃"],
 		"on_error": ["娃娃机复位按钮确定"]
 	},
@@ -356,7 +362,8 @@
 					"minigame/catchtoy/抓娃娃绿色按钮1.png"
 				],
 				"roi": [98, 1095, 149, 121],
-				"threshold": 0.6
+				"threshold": 0.6,
+				"order_by": "Score"
 			}
 		},
 		"action": {
@@ -368,6 +375,7 @@
 		},
 		"pre_delay": 1000,
 		"post_delay": 1900,
+		"timeout": 8000,
 		"next": ["抓娃娃蓝色按钮"],
 		"on_error": ["null"]
 	},
@@ -380,7 +388,8 @@
 					"minigame/catchtoy/抓娃娃蓝色按钮1.png"
 				],
 				"roi": [253, 1095, 149, 139],
-				"threshold": 0.6
+				"threshold": 0.6,
+				"order_by": "Score"
 			}
 		},
 		"action": {
@@ -392,6 +401,7 @@
 		},
 		"pre_delay": 2000,
 		"post_delay": 1000,
+		"timeout": 8000,
 		"next": ["抓娃娃粉色按钮"],
 		"on_error": ["null"]
 	},
@@ -404,7 +414,8 @@
 					"minigame/catchtoy/抓娃娃粉色按钮1.png"
 				],
 				"roi": [421, 1103, 182, 123],
-				"threshold": 0.6
+				"threshold": 0.6,
+				"order_by": "Score"
 			}
 		},
 		"action": {
