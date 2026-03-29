@@ -284,5 +284,24 @@
 			}
 		},
 		"next": []
+	},
+	"体力耗尽不再继续": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["道具", "道", "具"],
+				"roi": [412, 407, 137, 48]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target": [19, 936, 12, 13]
+			}
+		},
+		"repeat": 5,
+		"repeat_delay": 200,
+		"focus": "体力已耗尽",
+		"next": []
 	}
 }

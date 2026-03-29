@@ -399,24 +399,33 @@
 		},
 		"next": []
 	},
-	"体力耗尽不再继续": {
+	"退出手账编辑popop": {
 		"recognition": {
-			"type": "OCR",
+			"type": "TemplateMatch",
 			"param": {
-				"expected": ["道具", "道", "具"],
-				"roi": [412, 407, 137, 48]
+				"template": ["popop/直接退出手账编辑.png"],
+				"roi": [425, 613, 193, 127]
 			}
 		},
 		"action": {
 			"type": "Click",
 			"param": {
-				"target": [19, 936, 12, 13]
+				"target_offset": [2, 5, -4, -10]
+			}
+		}
+	},
+	"退出手账保存popop": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["task/weekly/完成盖章.png"],
+				"roi": [620, 846, 100, 125]
 			}
 		},
-		"repeat": 5,
-		"repeat_delay": 200,
-		"focus": "体力已耗尽",
-		"next": []
+		"action": {
+			"type": "Click",
+			"param": {}
+		}
 	},
 	"网络连接失败popop": {
 		"recognition": {
