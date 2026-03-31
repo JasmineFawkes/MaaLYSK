@@ -74,6 +74,7 @@ jobs:
           TARGET_PATH: ${{ steps.release.outputs.target_path }}
           GH_TOKEN: ${{ secrets.GH_PAT }}
           REPO: ${{ github.repository }}
+          APP_NAME: "MaaLYSK"
         run: |
           pip install requests
           
@@ -86,13 +87,17 @@ jobs:
           TARGET_PATH = os.environ.get('TARGET_PATH', '/Releases')
           GH_TOKEN = os.environ.get('GH_TOKEN')
           REPO = os.environ.get('REPO')
+          APP_NAME = os.environ.get('APP_NAME', 'MaaLYSK')
+          
+          # 拼接完整的百度网盘路径（必须以 /apps/应用名 开头）
+          FULL_PATH = f"/apps/{APP_NAME}{TARGET_PATH}"
           
           if not all([CLIENT_ID, CLIENT_SECRET, OLD_REFRESH_TOKEN]):
               print("❌ Missing credentials")
               sys.exit(1)
           
           print(f"=== MaaLYSK Sync to BaiduPan ===")
-          print(f"Target: {TARGET_PATH}\n")
+          print(f"Target: {FULL_PATH}\n")
           
           def refresh_token():
               url = "https://openapi.baidu.com/oauth/2.0/token"
@@ -139,7 +144,7 @@ jobs:
                   return False
           
           def upload_file(token, file_url, filename):
-              full_path = f"{TARGET_PATH.rstrip('/')}/{filename}"
+              full_path = f"{FULL_PATH.rstrip('/')}/{filename}"
               print(f"\n📦 {filename}")
               try:
                   print("  ⬇️  Downloading...")
@@ -178,7 +183,7 @@ jobs:
                   print("✓ Refresh token auto-updated\n")
           
           # 创建文件夹
-          if not create_folder(access_token, TARGET_PATH):
+          if not create_folder(access_token, FULL_PATH):
               sys.exit(1)
           
           # 读取 assets
@@ -201,7 +206,7 @@ jobs:
               time.sleep(1)
           
           print(f"\n=== Summary: {success}/{len(assets)} ===")
-          print(f"📁 {TARGET_PATH}")
+          print(f"📁 {FULL_PATH}")
           if success < len(assets):
               sys.exit(1)
           EOF
@@ -210,7 +215,7 @@ jobs:
         if: always()
         run: |
           echo "=== Upload Complete ==="
-          echo "Files uploaded to: ${{ steps.release.outputs.target_path }}"
+          echo "Files will be saved to: /apps/MaaLYSK${{ steps.release.outputs.target_path }}"
           echo ""
           echo "Uploaded files:"
           cat assets.txt
