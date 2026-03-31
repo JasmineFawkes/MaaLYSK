@@ -17,7 +17,6 @@ jobs:
       - name: Get Release Info and Generate Folder Name
         id: release
         run: |
-          # 获取 tag 名称
           if [ -n "${{ github.event.inputs.tag }}" ]; then
             TAG="${{ github.event.inputs.tag }}"
           elif [ -n "${{ github.event.release.tag_name }}" ]; then
@@ -27,7 +26,6 @@ jobs:
           fi
           echo "tag=$TAG" >> $GITHUB_OUTPUT
           
-          # 获取发布日期
           RELEASE_URL="https://api.github.com/repos/Witty36/MaaLYSK/releases/tags/$TAG"
           RELEASE_DATA=$(curl -s -H "Accept: application/vnd.github.v3+json" "$RELEASE_URL")
           
@@ -36,15 +34,11 @@ jobs:
             PUBLISHED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
           fi
           
-          # 格式化日期
           YEAR=$(echo "$PUBLISHED_AT" | cut -d'-' -f1)
           MONTH=$(echo "$PUBLISHED_AT" | cut -d'-' -f2 | sed 's/^0//')
           DAY=$(echo "$PUBLISHED_AT" | cut -d'-' -f3 | cut -d'T' -f1 | sed 's/^0//')
-          
-          # 去掉 tag 开头的 'v'
           VERSION=$(echo "$TAG" | sed 's/^v//')
           
-          # 生成文件夹名称
           FOLDER_NAME="${VERSION} (${YEAR}-${MONTH}-${DAY})"
           echo "folder_name=$FOLDER_NAME" >> $GITHUB_OUTPUT
           
@@ -55,7 +49,6 @@ jobs:
           echo "Published: $PUBLISHED_AT"
           echo "Target folder: $FOLDER_NAME"
           
-          # 只保留需要的平台文件
           echo "$RELEASE_DATA" | jq -r '.assets[] | "\(.browser_download_url)|\(.name)"' | \
             grep -E "(macos-aarch64|macos-x86_64|win-aarch64|win-x86_64)" | \
             grep -v "linux" > assets.txt
@@ -79,7 +72,7 @@ jobs:
           pip install requests
           
           python3 << 'EOF'
-          import os, sys, requests, json, time, subprocess
+          import os, sys, requests, json, time, subprocess, hashlib
           
           CLIENT_ID = os.environ.get('CLIENT_ID')
           CLIENT_SECRET = os.environ.get('CLIENT_SECRET')
@@ -89,7 +82,6 @@ jobs:
           REPO = os.environ.get('REPO')
           APP_NAME = os.environ.get('APP_NAME', 'MaaLYSK')
           
-          # 拼接完整的百度网盘路径（必须以 /apps/应用名 开头）
           FULL_PATH = f"/apps/{APP_NAME}{TARGET_PATH}"
           
           if not all([CLIENT_ID, CLIENT_SECRET, OLD_REFRESH_TOKEN]):
@@ -122,45 +114,58 @@ jobs:
               result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
               return result.returncode == 0
           
-          def create_folder(token, path):
-              url = "https://pan.baidu.com/rest/2.0/xpan/file"
-              params = {
-                  'method': 'create',
-                  'access_token': token,
-                  'path': path,
-                  'isdir': '1'
-              }
-              resp = requests.post(url, params=params)
-              result = resp.json()
-              errno = result.get('errno')
-              if errno == 0:
-                  print(f"✓ Created: {path}")
-                  return True
-              elif errno == -8:
-                  print(f"✓ Exists: {path}")
-                  return True
-              else:
-                  print(f"✗ Create failed: {result}")
-                  return False
-          
-          def upload_file(token, file_url, filename):
+          def upload_file_precreate(token, file_url, filename):
               full_path = f"{FULL_PATH.rstrip('/')}/{filename}"
               print(f"\n📦 {filename}")
+              
               try:
+                  # 下载文件
                   print("  ⬇️  Downloading...")
                   r = requests.get(file_url, timeout=300)
                   r.raise_for_status()
-                  size_mb = len(r.content) / 1024 / 1024
+                  file_content = r.content
+                  file_size = len(file_content)
+                  size_mb = file_size / 1024 / 1024
                   print(f"  📊 {size_mb:.2f} MB")
                   
-                  print("  ⬆️  Uploading to BaiduPan...")
-                  resp = requests.post(
-                      "https://pan.baidu.com/rest/2.0/xpan/file",
-                      params={'method': 'upload', 'access_token': token, 'path': full_path},
-                      files={'file': (filename, r.content)},
-                      timeout=300
-                  )
+                  # 计算 MD5
+                  md5 = hashlib.md5(file_content).hexdigest()
+                  
+                  # precreate
+                  print("  📝 Precreating...")
+                  params = {
+                      'method': 'precreate',
+                      'access_token': token,
+                      'path': full_path,
+                      'size': file_size,
+                      'isdir': '0',
+                      'autoinit': '1',
+                      'block_list': f'["{md5}"]'
+                  }
+                  resp = requests.post("https://pan.baidu.com/rest/2.0/xpan/file", params=params)
                   result = resp.json()
+                  
+                  if result.get('errno') != 0:
+                      print(f"  ❌ Precreate failed: {result}")
+                      return False
+                  
+                  upload_id = result.get('uploadid')
+                  print(f"  ✓ Precreated, upload_id: {upload_id[:20]}...")
+                  
+                  # 上传文件内容
+                  print("  ⬆️  Uploading...")
+                  params = {
+                      'method': 'upload',
+                      'access_token': token,
+                      'path': full_path,
+                      'uploadid': upload_id,
+                      'partseq': '0'
+                  }
+                  
+                  files = {'file': (filename, file_content)}
+                  resp = requests.post("https://pan.baidu.com/rest/2.0/xpan/file", params=params, files=files, timeout=300)
+                  result = resp.json()
+                  
                   if result.get('errno') == 0:
                       print("  ✅ Done")
                       return True
@@ -168,8 +173,9 @@ jobs:
                       print("  ⚠️  Already exists")
                       return True
                   else:
-                      print(f"  ❌ Failed: {result}")
+                      print(f"  ❌ Upload failed: {result}")
                       return False
+                      
               except Exception as e:
                   print(f"  ❌ Error: {e}")
                   return False
@@ -182,17 +188,12 @@ jobs:
               if update_github_secret('BAIDU_REFRESH_TOKEN', new_refresh_token):
                   print("✓ Refresh token auto-updated\n")
           
-          # 创建文件夹
-          if not create_folder(access_token, FULL_PATH):
-              sys.exit(1)
-          
           # 读取 assets
           with open('assets.txt') as f:
               assets = [line.strip().split('|') for line in f if line.strip()]
           
           if not assets:
               print("No matching assets to upload")
-              print("Expected: macos-aarch64, macos-x86_64, win-aarch64, win-x86_64")
               sys.exit(0)
           
           print(f"\nFound {len(assets)} file(s) to upload")
@@ -201,7 +202,7 @@ jobs:
           
           success = 0
           for url, name in assets:
-              if upload_file(access_token, url, name):
+              if upload_file_precreate(access_token, url, name):
                   success += 1
               time.sleep(1)
           
@@ -215,7 +216,7 @@ jobs:
         if: always()
         run: |
           echo "=== Upload Complete ==="
-          echo "Files will be saved to: /apps/MaaLYSK${{ steps.release.outputs.target_path }}"
+          echo "Files uploaded to: /apps/MaaLYSK${{ steps.release.outputs.target_path }}"
           echo ""
           echo "Uploaded files:"
           cat assets.txt
