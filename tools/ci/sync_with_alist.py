@@ -74,7 +74,7 @@ def login():
 def get_storage_id(token, path):
     """根据挂载路径获取存储 ID"""
     list_url = f"{ALIST_URL}/api/admin/storage/list"
-    headers = {"Authorization": token,"ngrok-skip-browser-warning": "true" }
+    headers = {"Authorization": token, "ngrok-skip-browser-warning": "true"}
     try:
         resp = requests.get(list_url, headers=headers, timeout=15)
         resp.raise_for_status()
@@ -97,7 +97,7 @@ def get_storage_id(token, path):
 def get_storage_detail(token, storage_id):
     """pull the current config"""
     detail_url = f"{ALIST_URL}/api/admin/storage/get"
-    headers = {"Authorization": token,"ngrok-skip-browser-warning": "true" }
+    headers = {"Authorization": token, "ngrok-skip-browser-warning": "true"}
     try:
         resp = requests.get(
             detail_url, headers=headers, params={"id": storage_id}, timeout=15
@@ -124,7 +124,7 @@ def refresh_storage(token, storage_id):
         return
 
     update_url = f"{ALIST_URL}/api/admin/storage/update"
-    headers = {"Authorization": token,"ngrok-skip-browser-warning": "true" }
+    headers = {"Authorization": token, "ngrok-skip-browser-warning": "true"}
     fields = [
         "mount_path",
         "order",
@@ -183,7 +183,7 @@ def list_files(token, path):
 def create_dir(token, path):
     """在 Alist 中创建目录"""
     create_dir_url = f"{ALIST_URL}/api/fs/mkdir"
-    headers = {"Authorization": token,"ngrok-skip-browser-warning": "true" }
+    headers = {"Authorization": token, "ngrok-skip-browser-warning": "true"}
     payload = {"path": path}
     try:
         resp = requests.post(create_dir_url, headers=headers, json=payload, timeout=15)
@@ -205,7 +205,7 @@ def create_dir(token, path):
 def copy_file(token, src_dir, dest_dir, filename):
     """在 Alist 内部复制单个文件"""
     copy_url = f"{ALIST_URL}/api/fs/copy"
-    headers = {"Authorization": token,"ngrok-skip-browser-warning": "true" }
+    headers = {"Authorization": token, "ngrok-skip-browser-warning": "true"}
     payload = {"src_dir": src_dir, "dst_dir": dest_dir, "names": [filename]}
     print(f"  > 正在复制 '{src_dir}/{filename}' 到 '{dest_dir}' ...")
     try:
@@ -232,9 +232,9 @@ def safe_folder_name(name: str) -> str:
     """将文件夹名中的空格替换为空格（保持原样），只移除不安全字符"""
     # 允许的字符：字母、数字、空格、点、短横线、括号
     # 将其他特殊字符替换为空格
-    cleaned = re.sub(r'[^\w\s.\-\(\)]', ' ', name)
+    cleaned = re.sub(r"[^\w\s.\-\(\)]", " ", name)
     # 移除多余空格
-    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
     return cleaned
 
 
@@ -267,6 +267,27 @@ def main():
     latest_tag = get_latest_release_tag()
     files_to_process = []
 
+    # 获取 Release 的发布日期（需要在获取文件列表前获取）
+    release_published_at = None
+    if latest_tag:
+        # 从 GitHub API 获取 Release 信息
+        github_api_url = (
+            f"https://api.github.com/repos/Witty36/MaaLYSK/releases/tags/{latest_tag}"
+        )
+        try:
+            import urllib.request
+            import json
+
+            with urllib.request.urlopen(github_api_url) as response:
+                release_data = json.loads(response.read().decode())
+                release_published_at = release_data.get("published_at", "")
+                if release_published_at:
+                    # 格式化为 yyyy-MM-dd
+                    release_date = release_published_at.split("T")[0]
+                    print(f"✓ Release 发布日期: {release_date}")
+        except Exception as e:
+            print(f"! 获取 Release 发布日期失败: {e}，将使用当前日期")
+
     for i in range(MAX_RETRIES):
         print(f"\n--- 正在获取文件列表 (尝试 {i+1}/{MAX_RETRIES}) ---")
         all_files = list_files(token, SOURCE_DIR)
@@ -277,7 +298,7 @@ def main():
         if latest_tag:
             # 打印 all_files 内容用于调试
             print(f"  [DEBUG] all_files 中的项目: {[f.get('name') for f in all_files]}")
-            
+
             # 找到版本文件夹
             version_folder = None
             for f in all_files:
@@ -285,15 +306,16 @@ def main():
                 if f.get("is_dir") and latest_tag in f.get("name", ""):
                     version_folder = f.get("name")
                     break
-            
+
             if version_folder:
                 print(f"✓ 找到版本文件夹: {version_folder}")
-                # 进入版本文件夹获取实际文件
                 folder_path = f"{SOURCE_DIR}/{version_folder}"
                 print(f"  正在获取 {folder_path} 中的文件列表...")
                 files_to_process = list_files(token, folder_path)
                 if files_to_process:
-                    print(f"✓ 找到 {len(files_to_process)} 个文件: {[f['name'] for f in files_to_process]}")
+                    print(
+                        f"✓ 找到 {len(files_to_process)} 个文件: {[f['name'] for f in files_to_process]}"
+                    )
                     break
                 else:
                     print(f"! 版本文件夹 '{version_folder}' 中没有找到文件")
@@ -331,9 +353,16 @@ def main():
             print("  - 无法从文件名中提取版本号，跳过。")
             continue
 
-        date_str = datetime.now().strftime("%Y-%m-%d")
-        new_folder_name = safe_folder_name(f"{version} (发布于{date_str})")
-        print(f"  - 版本: {version}, 目标文件夹: {new_folder_name}")
+        # 使用 Release 的实际发布日期，如果没有则用当前日期
+        if release_published_at:
+            date_str = release_published_at.split("T")[0]  # 取 yyyy-MM-dd 部分
+        else:
+            date_str = datetime.now().strftime("%Y-%m-%d")
+
+        new_folder_name = safe_folder_name(f"{version} ({date_str})")
+        print(
+            f"  - 版本: {version}, 发布日期: {date_str}, 目标文件夹: {new_folder_name}"
+        )
 
         matched = False
         for keywords, dest_paths in DISTRIBUTION_RULES:
@@ -363,6 +392,7 @@ def main():
             print("  - 未匹配到任何分发规则，跳过。")
 
     print("\n--- 所有文件处理完毕 ---")
+
 
 if __name__ == "__main__":
     main()
