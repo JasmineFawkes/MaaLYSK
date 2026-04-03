@@ -359,7 +359,7 @@ def main():
         else:
             date_str = datetime.now().strftime("%Y-%m-%d")
 
-        new_folder_name = safe_folder_name(f"{version} ({date_str})")
+        new_folder_name = safe_folder_name(f"{version} (发布于{date_str})")
         print(
             f"  - 版本: {version}, 发布日期: {date_str}, 目标文件夹: {new_folder_name}"
         )
