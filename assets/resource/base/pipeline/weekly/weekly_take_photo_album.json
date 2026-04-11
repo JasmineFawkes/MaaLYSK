@@ -31,15 +31,9 @@
 			"Node.Action.Succeeded": "进入一起拍照"
 		},
 		"post_delay": 400,
-		"next": [
-			"写真_选择沈星回",
-			"写真_选择黎深",
-			"写真_选择祁煜",
-			"写真_选择秦彻",
-			"写真_选择夏以昼"
-		]
+		"next": ["选择沈星回", "选择黎深", "选择祁煜", "选择秦彻", "选择夏以昼"]
 	},
-	"写真_选择沈星回": {
+	"写真_选择人物": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
@@ -54,83 +48,7 @@
 		"enabled": false,
 		"max_hit": 1,
 		"focus": {
-			"Node.Action.Succeeded": "进入沈星回拍写真"
-		},
-		"next": ["进入写真页面"]
-	},
-	"写真_选择黎深": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["黎深.png"],
-				"roi": [380, 411, 122, 114]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": false,
-		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入黎深拍写真"
-		},
-		"next": ["进入写真页面"]
-	},
-	"写真_选择祁煜": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["祁煜.png"],
-				"roi": [186, 624, 118, 111]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": false,
-		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入祁煜拍写真"
-		},
-		"next": ["进入写真页面"]
-	},
-	"写真_选择秦彻": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["秦彻.png"],
-				"roi": [422, 819, 110, 111]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": false,
-		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入秦彻拍写真"
-		},
-		"next": ["进入写真页面"]
-	},
-	"写真_选择夏以昼": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["夏以昼.png"],
-				"roi": [202, 1013, 94, 106]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": false,
-		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入夏以昼拍写真"
+			"Node.Action.Succeeded": "进入xx拍写真"
 		},
 		"next": ["进入写真页面"]
 	},

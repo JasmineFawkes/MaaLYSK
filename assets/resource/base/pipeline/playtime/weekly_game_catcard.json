@@ -32,14 +32,14 @@
 		},
 		"post_delay": 400,
 		"next": [
-			"[JumpBack]喵喵牌_选择沈星回",
-			"[JumpBack]喵喵牌_选择黎深",
-			"[JumpBack]喵喵牌_选择祁煜",
-			"[JumpBack]喵喵牌_选择秦彻",
-			"[JumpBack]喵喵牌_选择夏以昼"
+			"[JumpBack]选择沈星回",
+			"[JumpBack]选择黎深",
+			"[JumpBack]选择祁煜",
+			"[JumpBack]选择秦彻",
+			"[JumpBack]选择夏以昼"
 		]
 	},
-	"喵喵牌_选择沈星回": {
+	"喵喵牌_选择人物": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
@@ -51,86 +51,10 @@
 			"type": "Click",
 			"param": {}
 		},
-		"enabled": true,
 		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入沈星回喵喵牌"
-		},
-		"next": ["进入喵喵牌页面"]
-	},
-	"喵喵牌_选择黎深": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["黎深.png"],
-				"roi": [380, 411, 122, 114]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
 		"enabled": true,
-		"max_hit": 1,
 		"focus": {
-			"Node.Action.Succeeded": "进入黎深喵喵牌"
-		},
-		"next": ["进入喵喵牌页面"]
-	},
-	"喵喵牌_选择祁煜": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["祁煜.png"],
-				"roi": [186, 624, 118, 111]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入祁煜喵喵牌"
-		},
-		"next": ["进入喵喵牌页面"]
-	},
-	"喵喵牌_选择秦彻": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["秦彻.png"],
-				"roi": [422, 819, 110, 111]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入秦彻喵喵牌"
-		},
-		"next": ["进入喵喵牌页面"]
-	},
-	"喵喵牌_选择夏以昼": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": ["夏以昼.png"],
-				"roi": [202, 1013, 94, 106]
-			}
-		},
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"enabled": true,
-		"max_hit": 1,
-		"focus": {
-			"Node.Action.Succeeded": "进入夏以昼喵喵牌"
+			"Node.Action.Succeeded": "进入xx喵喵牌"
 		},
 		"next": ["进入喵喵牌页面"]
 	},
