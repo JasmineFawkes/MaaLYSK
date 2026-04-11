@@ -334,7 +334,6 @@
 		},
 		"next": []
 	},
-
 	"退出道具使用popop": {
 		"recognition": {
 			"type": "OCR",
@@ -396,6 +395,20 @@
 			"param": {
 				"target": [19, 936, 12, 13]
 			}
+		},
+		"next": []
+	},
+	"退出我醒了popop": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["我醒了"],
+				"roi": [240, 829, 244, 187]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
 		},
 		"next": []
 	},
