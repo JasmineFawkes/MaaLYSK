@@ -102,6 +102,14 @@
 					"enabled": true
 				},
 				{
+					"name": "👥陪我一起",
+					"enabled": false,
+					"option": {
+						"陪我一起选择男主": ["祁煜"],
+						"选择陪伴类型_祁煜": ["陪我运动"]
+					}
+				},
+				{
 					"name": "📅日常收尾",
 					"enabled": true
 				},

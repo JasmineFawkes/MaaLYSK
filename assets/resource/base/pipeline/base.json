@@ -198,6 +198,34 @@
 		},
 		"next": []
 	},
+	"点击互动": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["mainmap/进入互动.png", "mainmap/进入互动1.png"],
+				"roi": [11, 266, 166, 155],
+				"green_mask": true
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target_offset": [6, 5, -12, -10]
+			}
+		},
+		"next": ["互动页面确认"]
+	},
+	"互动页面确认": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["quality_time/点击陪我一起.png"],
+				"roi": [514, 1118, 151, 144],
+				"green_mask": true
+			}
+		},
+		"next": []
+	},
 	"点击零点追踪": {
 		"recognition": {
 			"type": "OCR",

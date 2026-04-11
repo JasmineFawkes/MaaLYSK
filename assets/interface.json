@@ -52,14 +52,11 @@
 		"resource/tasks/Phone_Message.json",
 		"resource/tasks/Phone_Moments.json",
 		"resource/tasks/Phone_Telephone.json",
+		"resource/tasks/QualityTime.json",
 		"resource/tasks/FeatureTask.json",
 		"resource/tasks/EventTask.json",
 		"resource/tasks/CloseLYSK.json"
 	],
-	"agent_demo": {
-		"child_exec": "python",
-		"child_args": ["{PROJECT_DIR}/agent/main.py"]
-	},
 	"task": [],
 	"option": {}
 }
