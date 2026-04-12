@@ -159,27 +159,48 @@ jobs:
         run: |
           rm -rf MFA/runtimes
 
-        #查找并重命名 MFAAvalonia.exe 为 MaaLYSK
-      - name: Rename MFAAvalonia
+      # ===========================================================================
+      # ✅ 统一重命名 MFAAvalonia 可执行文件为 MaaLYSK
+      #    支持 Windows (.exe)、macOS (无扩展名) 和 Linux (无扩展名)
+      # ===========================================================================
+      - name: Rename MFAAvalonia to MaaLYSK
         shell: bash
         run: |
-          echo "Processing MFAAvalonia files..."
-          if [ -f "MFA/MFAAvalonia.exe" ]; then
-            mv "MFA/MFAAvalonia.exe" "MFA/MaaLYSK.exe"
-            echo "Renamed MFAAvalonia.exe to MaaLYSK.exe"
+          echo "Processing MFAAvalonia files for ${{ matrix.os }}..."
+
+          # 定义可能的原始文件名
+          ORIGINAL_NAMES=("MFAAvalonia" "MFAAvalonia.exe" "MaaYuan" "MaaYuan.exe")
+
+          # 定义目标文件名（根据平台）
+          if [[ "${{ matrix.os }}" == "win" ]]; then
+            TARGET_NAME="MaaLYSK.exe"
           else
-            echo "MFAAvalonia.exe not found in MFA directory"
+            TARGET_NAME="MaaLYSK"
           fi
 
-      - name: Rename MaaYuan
-        shell: bash
-        run: |
-          echo "Processing MFAAvalonia files..."
-          if [ -f "MFA/MaaYuan.exe" ]; then
-            mv "MFA/MaaYuan.exe" "MFA/MaaLYSK.exe"
-            echo "Renamed MaaYuan.exe to MaaLYSK.exe"
+          # 查找并重命名
+          FOUND=false
+          for original_name in "${ORIGINAL_NAMES[@]}"; do
+            if [ -f "MFA/$original_name" ]; then
+              echo "Found $original_name, renaming to $TARGET_NAME..."
+              mv "MFA/$original_name" "MFA/$TARGET_NAME"
+              
+              # 为非 Windows 平台设置可执行权限
+              if [[ "${{ matrix.os }}" != "win" ]]; then
+                chmod +x "MFA/$TARGET_NAME"
+                echo "Set execute permission for $TARGET_NAME"
+              fi
+              
+              FOUND=true
+              break
+            fi
+          done
+
+          if [ "$FOUND" = false ]; then
+            echo "⚠️ Warning: No MFAAvalonia or MaaYuan executable found in MFA directory for ${{ matrix.os }}"
+            ls -la MFA/ | head -20 || echo "MFA directory contents unavailable"
           else
-            echo "MaaYuan.exe not found in MFA directory"
+            echo "✅ Successfully renamed to $TARGET_NAME"
           fi
 
       - name: Install
