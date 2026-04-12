@@ -425,7 +425,8 @@
 			"param": {
 				"target_offset": [2, 5, -4, -10]
 			}
-		}
+		},
+		"next": []
 	},
 	"退出手账保存popop": {
 		"recognition": {
@@ -438,7 +439,8 @@
 		"action": {
 			"type": "Click",
 			"param": {}
-		}
+		},
+		"next": []
 	},
 	"退出手账保存1popop": {
 		"recognition": {
@@ -451,7 +453,8 @@
 		"action": {
 			"type": "Click",
 			"param": {}
-		}
+		},
+		"next": []
 	},
 	"网络连接失败popop": {
 		"recognition": {
@@ -467,7 +470,8 @@
 				"target": [456, 667, 42, 20]
 			}
 		},
-		"focus": "网络连接失败,尝试点击关闭弹窗"
+		"focus": "网络连接失败,尝试点击关闭弹窗",
+		"next": []
 	},
 	"断线重连popop": {
 		"recognition": {
