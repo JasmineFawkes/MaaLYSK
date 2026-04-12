@@ -12,17 +12,21 @@ except ModuleNotFoundError as e:
         "Or add it to your project's requirements."
     ) from e
 
+# Add ci directory to sys.path to allow importing configure
+ci_dir = Path(__file__).parent.resolve()
+sys.path.insert(0, str(ci_dir))
+
 from configure import configure_ocr_model
 
 
-working_dir = Path(__file__).parent.parent.resolve()
+working_dir = Path(__file__).parent.parent.parent.resolve()
 install_path = working_dir / Path("install")
 version = len(sys.argv) > 1 and sys.argv[1] or "v0.0.1"
 
 # the first parameter is self name
 if sys.argv.__len__() < 4:
-    print("Usage: python install.py <version> <os> <arch>")
-    print("Example: python install.py v1.0.0 win x86_64")
+    print("Usage: python ci/install.py <version> <os> <arch>")
+    print("Example: python ci/install.py v1.0.0 win x86_64")
     sys.exit(1)
 
 os_name = sys.argv[2]

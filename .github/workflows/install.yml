@@ -189,7 +189,7 @@ jobs:
 
           cd tools/
           python -m pip install -r ./requirements.txt
-          python ./install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
+          python ./ci/install.py ${{ needs.meta.outputs.tag }} ${{ matrix.os }} ${{ matrix.arch }}
           cd ..
 
       #- name: Replace Icon
@@ -235,8 +235,16 @@ jobs:
       - run: |
           cd assets
           for f in *; do
-            (cd "$f" && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            if [[ "$f" == *win* ]]; then
+              # Windows 平台使用 zip
+              (cd "$f" && zip -r ../$f-${{ needs.meta.outputs.tag }}.zip .)
+            else
+              # 其他平台使用 tar.gz
+              (cd "$f" && tar -czf ../$f-${{ needs.meta.outputs.tag }}.tar.gz .)
+            fi
           done
+          # 删除子目录，只保留压缩文件
+          rm -rf */ 2>/dev/null || true
 
       - uses: softprops/action-gh-release@v2
         with:
@@ -251,6 +259,9 @@ jobs:
           prerelease: ${{ needs.meta.outputs.is_prerelease == 'true' }}
 
       - name: Trigger MirrorChyanUploading
+        if: false
+        # if: ${{ github.repository_owner == 'MaaXYZ' }}
+        shell: bash
         run: |
           gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release.yml -f tag=${{ needs.meta.outputs.tag }}
           gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
