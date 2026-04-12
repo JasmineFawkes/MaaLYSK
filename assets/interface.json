@@ -57,6 +57,11 @@
 		"resource/tasks/EventTask.json",
 		"resource/tasks/CloseLYSK.json"
 	],
-	"task": [],
+	"task": [
+		{
+			"name": "=====分割线=====",
+			"entry": "stop"
+		}
+	],
 	"option": {}
 }
