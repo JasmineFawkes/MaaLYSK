@@ -5,7 +5,7 @@
 			"entry": "stop",
 			//"entry": "进入福利签到",
 			"default_check": false,
-			"description": "[color:orange]当前签到：目前关闭中[/color]\n\n如果有其它活动,第一天记得把其他活动剧情点掉,不然会卡住"
+			"description": "[color:orange]当前签到：目前关闭中[/color]\n\n如果有其它活动,第一天记得把活动剧情点掉,不然会卡住"
 		},
 		{
 			"name": "🛍️限时活动商城领取",
