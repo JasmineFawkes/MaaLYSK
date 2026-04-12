@@ -53,7 +53,7 @@
 			"default_case": ["沈星回", "黎深", "祁煜", "秦彻", "夏以昼"],
 			"cases": [
 				{
-					"name": "抽祁煜徽章",
+					"name": "祁煜",
 					"pipeline_override": {
 						"选择祁煜": {
 							"enabled": true
@@ -61,7 +61,7 @@
 					}
 				},
 				{
-					"name": "抽沈星回徽章",
+					"name": "沈星回",
 					"pipeline_override": {
 						"选择沈星回": {
 							"enabled": true
@@ -69,7 +69,7 @@
 					}
 				},
 				{
-					"name": "抽黎深徽章",
+					"name": "黎深",
 					"pipeline_override": {
 						"选择黎深": {
 							"enabled": true
@@ -77,7 +77,7 @@
 					}
 				},
 				{
-					"name": "抽秦彻徽章",
+					"name": "秦彻",
 					"pipeline_override": {
 						"选择秦彻": {
 							"enabled": true
@@ -85,7 +85,7 @@
 					}
 				},
 				{
-					"name": "抽夏以昼徽章",
+					"name": "夏以昼",
 					"pipeline_override": {
 						"选择夏以昼": {
 							"enabled": true

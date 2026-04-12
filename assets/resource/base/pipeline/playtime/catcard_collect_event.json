@@ -157,16 +157,26 @@
 		"repeat_delay": 1500,
 		"next": ["喵喵牌切换人物", "[JumpBack]返回上一级页面"]
 	},
+	"限时喵喵牌再抽一次1": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["再抽一次"],
+				"roi": [442, 1070, 103, 29]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"post_delay": 0
+	},
 	"检查限时喵喵牌次数": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["0"],
-				"replace": [
-					["o", "0"],
-					["O", "0"]
-				],
-				"roi": [682, 48, 34, 46]
+				"expected": ["喵呜币不足"],
+				"roi": [177, 515, 371, 144]
 			}
 		},
 		"action": {
