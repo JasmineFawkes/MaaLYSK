@@ -4,20 +4,20 @@
 			"name": "💫免费福利签到",
 			"entry": "进入福利签到",
 			"default_check": false,
-			"description": "[color:orange]当前签到：心动挚礼-祁煜共潮生[/color]\n\n如果有其它活动,第一天记得把其他活动剧情点掉,不然会卡住"
+			"description": "[color:orange]当前签到：目前关闭中[/color]\n\n如果有其它活动,第一天记得把其他活动剧情点掉,不然会卡住"
 		},
 		{
 			"name": "🛍️限时活动商城领取",
 			"entry": "进入活动商城领取",
 			"default_check": false,
-			"description": "[color:orange]当前版本：引魂照幽-夏以昼2.0日卡[/color]\n\n请尽量确保代币足够再使用，不然会卡住"
+			"description": "[color:orange]当前版本：目前关闭中[/color]\n\n请尽量确保代币足够再使用，不然会卡住"
 		},
 		{
 			"name": "🌟限时活动每日领取",
 			"entry": "进入限时活动",
 			"default_check": false,
 			//"option": ["韶华宴岁领取", "吉财临门领取", "金叶盈福领取"],
-			"description": "[color:orange]当前版本：引魂照幽-夏以昼2.0日卡[/color]\n\n限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画"
+			"description": "[color:orange]当前版本：目前关闭中[/color]\n\n限时活动领取每日任务奖励，需要提前进入一次页面以防止有动画"
 		},
 		{
 			"name": "✨限时活动读剧情",
