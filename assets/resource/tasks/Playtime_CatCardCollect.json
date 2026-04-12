@@ -4,6 +4,7 @@
 			"name": "🏅喵喵牌限时抽卡",
 			"entry": "进入限时抽喵喵牌",
 			"default_check": false,
+			"option": ["选择限时抽喵喵牌男主"],
 			"description": "把所有的限时喵喵牌抽卡次数都用掉\n\n[color:red]deadline前记得检查有没有漏做[/color]",
 			"pipeline_override": {
 				"选择沈星回": {
@@ -48,6 +49,7 @@
 	"option": {
 		"选择限时抽喵喵牌男主": {
 			"type": "checkbox",
+			"label": "选择抽喵喵徽章男主",
 			"default_case": ["沈星回", "黎深", "祁煜", "秦彻", "夏以昼"],
 			"cases": [
 				{

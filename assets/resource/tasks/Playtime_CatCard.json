@@ -4,7 +4,7 @@
 			"name": "🐱周常喵喵牌",
 			"entry": "进入喵喵牌",
 			"default_check": false,
-			"option": ["囤积达上限是否继续"],
+			"option": ["囤积达上限是否继续", "喵喵牌游玩男主"],
 			"description": "可选囤积达上限是否继续,如果不继续的话记得检查2400巧克力有没有达到",
 			"pipeline_override": {
 				"选择沈星回": {
