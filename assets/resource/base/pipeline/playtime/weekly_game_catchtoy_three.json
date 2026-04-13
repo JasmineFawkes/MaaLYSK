@@ -282,9 +282,13 @@
 			}
 		},
 		"action": {
-			"type": "DoNothing",
-			"param": {}
+			"type": "Click",
+			"param": {
+				"target": [102, 434, 186, 97]
+			}
 		},
+		"repeat": 10,
+		"repeat_delay": 100,
 		"post_delay": 10000,
 		"next": []
 	},
