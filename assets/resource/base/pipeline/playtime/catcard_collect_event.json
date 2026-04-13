@@ -1,5 +1,5 @@
 {
-	"进入限时抽喵喵牌": {
+	"进入限时抽喵喵徽章": {
 		"recognition": {
 			"type": "DirectHit",
 			"param": {}
@@ -9,13 +9,13 @@
 			"param": {}
 		},
 		"next": [
-			"限时抽喵喵牌_点击快乐出游",
+			"限时抽喵喵徽章_点击快乐出游",
 			"[JumpBack]点击约会",
 			"[JumpBack]返回上一级页面",
 			"[JumpBack]导航回主页面"
 		]
 	},
-	"限时抽喵喵牌_点击快乐出游": {
+	"限时抽喵喵徽章_点击快乐出游": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
@@ -39,7 +39,7 @@
 			"[JumpBack]选择夏以昼"
 		]
 	},
-	"限时抽喵喵牌_选择人物": {
+	"限时抽喵喵徽章_选择人物": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
@@ -54,11 +54,11 @@
 		"enabled": true,
 		"max_hit": 1,
 		"focus": {
-			"Node.Action.Succeeded": "进入沈星回限时抽喵喵牌"
+			"Node.Action.Succeeded": "进入沈星回限时抽喵喵徽章"
 		},
-		"next": ["进入限时抽喵喵牌页面"]
+		"next": ["进入限时抽喵喵徽章页面"]
 	},
-	"进入限时抽喵喵牌页面": {
+	"进入限时抽喵喵徽章页面": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {

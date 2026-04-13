@@ -2,40 +2,40 @@
 	"task": [
 		{
 			"name": "🏅喵喵牌限时抽卡",
-			"entry": "进入限时抽喵喵牌",
+			"entry": "进入限时抽喵喵徽章",
 			"default_check": false,
-			"option": ["选择限时抽喵喵牌男主"],
+			"option": ["选择限时抽喵喵徽章男主"],
 			"description": "把所有的限时喵喵牌抽卡次数都用掉\n\n[color:red]deadline前记得检查有没有漏做[/color]",
 			"pipeline_override": {
 				"选择沈星回": {
 					"focus": {
-						"Node.Action.Succeeded": "进入沈星回限时抽喵喵牌"
+						"Node.Action.Succeeded": "进入沈星回限时抽喵喵徽章"
 					},
-					"next": ["进入限时抽喵喵牌页面"]
+					"next": ["进入限时抽喵喵徽章页面"]
 				},
 				"选择黎深": {
 					"focus": {
-						"Node.Action.Succeeded": "进入黎深限时抽喵喵牌"
+						"Node.Action.Succeeded": "进入黎深限时抽喵喵徽章"
 					},
-					"next": ["进入限时抽喵喵牌页面"]
+					"next": ["进入限时抽喵喵徽章页面"]
 				},
 				"选择祁煜": {
 					"focus": {
-						"Node.Action.Succeeded": "进入祁煜限时抽喵喵牌"
+						"Node.Action.Succeeded": "进入祁煜限时抽喵喵徽章"
 					},
-					"next": ["进入限时抽喵喵牌页面"]
+					"next": ["进入限时抽喵喵徽章页面"]
 				},
 				"选择秦彻": {
 					"focus": {
-						"Node.Action.Succeeded": "进入秦彻限时抽喵喵牌"
+						"Node.Action.Succeeded": "进入秦彻限时抽喵喵徽章"
 					},
-					"next": ["进入限时抽喵喵牌页面"]
+					"next": ["进入限时抽喵喵徽章页面"]
 				},
 				"选择夏以昼": {
 					"focus": {
-						"Node.Action.Succeeded": "进入沈星回限时抽喵喵牌"
+						"Node.Action.Succeeded": "进入沈星回限时抽喵喵徽章"
 					},
-					"next": ["进入限时抽喵喵牌页面"]
+					"next": ["进入限时抽喵喵徽章页面"]
 				}
 			}
 		},
@@ -47,7 +47,7 @@
 		}
 	],
 	"option": {
-		"选择限时抽喵喵牌男主": {
+		"选择限时抽喵喵徽章男主": {
 			"type": "checkbox",
 			"label": "选择抽喵喵徽章男主",
 			"default_case": ["沈星回", "黎深", "祁煜", "秦彻", "夏以昼"],
