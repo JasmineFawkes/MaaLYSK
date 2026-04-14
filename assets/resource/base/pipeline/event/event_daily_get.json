@@ -8,9 +8,9 @@
 			"type": "DoNothing",
 			"param": {}
 		},
-		"next": ["进入引魂照幽"]
+		"next": ["进入夜雨流明"]
 	},
-	"进入引魂照幽": {
+	"进入夜雨流明": {
 		"recognition": {
 			"type": "DirectHit",
 			"param": {}
@@ -21,7 +21,9 @@
 		},
 		"max_hit": 1,
 		"next": [
-			"引魂照幽菜单",
+			"[JumpBack]跳过引导",
+			"夜雨流明菜单",
+			"[JumpBack]自动过剧情",
 			"[JumpBack]退出点击空白继续popop",
 			"[JumpBack]退出获得奖励popop",
 			"[JumpBack]点击活动",
@@ -29,11 +31,28 @@
 			"[JumpBack]导航回主页面"
 		]
 	},
-	"引魂照幽菜单": {
+	"跳过引导": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["跳过引导", "跳过", "引导", "指导"],
+				"roi": [471, 5, 245, 168]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"post_delay": 2000,
+		"timeout": 4000,
+		"next": ["确认返回教学引导popop"],
+		"on_error": ["null"]
+	},
+	"夜雨流明菜单": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["event/daily_get/引魂照幽菜单.png"],
+				"template": ["event/daily_get/夜雨流明菜单.png"],
 				"roi": [10, 1179, 701, 79]
 			}
 		},
@@ -43,32 +62,32 @@
 		},
 		"post_delay": 1000,
 		"repeat": 2,
-		"next": ["引魂照幽限时领取"]
+		"next": ["[JumpBack]跳过引导", "夜雨流明限时领取"]
 	},
-	"引魂照幽限时领取": {
+	"夜雨流明限时领取": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["限时任务", "限时"],
-				"roi": [90, 1010, 189, 145]
+				"expected": ["织愿计划", "织愿", "计划"],
+				"roi": [0, 249, 121, 65]
 			}
 		},
 		"action": {
 			"type": "Click",
 			"param": {
-				"target_offset": [-15, 10, -25, 2]
+				"target_offset": [29, -32, -53, -8]
 			}
 		},
 		"timeout": 5000,
 		"post_delay": 2000,
-		"next": ["引魂照幽一键领取"]
+		"next": ["夜雨流明一键领取"]
 	},
-	"引魂照幽一键领取": {
+	"夜雨流明一键领取": {
 		"recognition": {
 			"type": "OCR",
 			"param": {
 				"expected": ["一键领取", "键领取", "领取"],
-				"roi": [448, 1091, 196, 123]
+				"roi": [426, 1044, 195, 122]
 			}
 		},
 		"action": {
@@ -77,7 +96,7 @@
 		},
 		"repeat": 5,
 		"post_delay": 2000,
-		"focus": "引魂照幽每日领取成功!",
+		"focus": "夜雨流明每日领取成功!",
 		"next": []
 	}
 }
