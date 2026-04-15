@@ -21,7 +21,8 @@
 			"点成2倍速",
 			"[JumpBack]选剧情选项",
 			"[JumpBack]自动过剧情点点"
-		]
+		],
+		"on_error": ["null"]
 	},
 	"点成2倍速": {
 		"recognition": {
@@ -39,7 +40,8 @@
 			"[JumpBack]跳过吹气",
 			"[JumpBack]自动过剧情点点",
 			"[JumpBack]live剧情等待"
-		]
+		],
+		"on_error": ["null"]
 	},
 	"自动过剧情点点": {
 		"recognition": {
