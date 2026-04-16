@@ -26,6 +26,7 @@
 			"controller": ["ADB模拟器", "PlayCover"]
 		}
 	],
+
 	"import": [
 		"resource/tasks/preset/Daily.json",
 		"resource/tasks/preset/Weekly.json",
