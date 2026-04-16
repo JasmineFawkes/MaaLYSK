@@ -1,11 +1,12 @@
 [remote.github]
-owner = "Witty36"
-repo = "MaaLYSK"
-
+owner = "MaaXYZ"
+repo = "MaaPracticeBoilerplate"
+#自用时换成自己的仓库owner和repo
+#注意，本地git user需与github一致才能实现成功@
 [changelog]
+# 标题
 header = """
 # 更新日志
-## Commit
 """
 
 body = """
@@ -33,80 +34,43 @@ body = """
     ## 未发布
 {% endif %}\
 
-{# 遍历 commits，按原分组输出，但改变格式 #}
 {% for group, commits in commits | group_by(attribute="group") %}
-    {# 获取干净的 group 名称（去掉注释和空格） #}
-    {% set clean_group = group | replace(pat="<!-- \\d -->", with="") | trim %}
-    
-    {# 如果是文档类型，单独处理，跳过这里 #}
-    {% if clean_group == "📚 文档" %}
-        {# 暂存，后面单独输出 #}
-        {% set doc_commits = commits %}
-    {% else %}
-        {# 将 emoji 分组名映射为英文前缀 #}
-        {% if clean_group == "✨ 新功能" %}
-            {% set prefix = "Feat" %}
-        {% elif clean_group == "🐛 Bug修复" %}
-            {% set prefix = "Fix" %}
-        {% elif clean_group == "🚀 性能优化" %}
-            {% set prefix = "Perf" %}
-        {% elif clean_group == "🚜 代码重构" %}
-            {% set prefix = "Refactor" %}
-        {% elif clean_group == "🎨 样式" %}
-            {% set prefix = "Style" %}
-        {% elif clean_group == "🧪 测试" %}
-            {% set prefix = "Test" %}
-        {% elif clean_group == "📦 依赖更新" %}
-            {% set prefix = "Chore" %}
-        {% elif clean_group == "🔧 日常维护" %}
-            {% set prefix = "Chore" %}
-        {% elif clean_group == "⚙️ 持续集成" %}
-            {% set prefix = "Ci" %}
-        {% elif clean_group == "🔒 安全" %}
-            {% set prefix = "Security" %}
-        {% elif clean_group == "◀️ 撤销" %}
-            {% set prefix = "Revert" %}
-        {% else %}
-            {% set prefix = clean_group %}
-        {% endif %}
-        
-        {# 输出该分组下的所有 commits #}
-        {% for commit in commits %}
-            {% set msg = commit.message | split(pat="[：:]", re=true) | last | trim %}
-            - {{ prefix }}：{{ msg }} @{{ commit.author.username | default(value=commit.author.name) }}
-        {% endfor %}
-    {% endif %}
+    ### {{ group | striptags | trim | upper_first }}
+    {% for commit in commits
+    | filter(attribute="scope")
+    | sort(attribute="scope") %}
+        {{ self::print_commit(commit=commit) }}
+    {%- endfor %}
+    {% for commit in commits %}
+        {%- if not commit.scope -%}
+            {{ self::print_commit(commit=commit) }}
+        {% endif -%}
+    {% endfor -%}
 {% endfor -%}
-
-{# 单独输出文档类型 #}
-{% if doc_commits is defined and doc_commits | length > 0 %}
-
-### Doc
-{% for commit in doc_commits %}
-    {% set msg = commit.message | split(pat="[：:]", re=true) | last | trim %}
-    - {{ msg }} @{{ commit.author.username | default(value=commit.author.name) }}
-{% endfor %}
-{% endif -%}
-
-{# 修复：只在 github 存在且有 contributors 时才输出 #}
-{%- if github is defined and github and github.contributors is defined and github.contributors | filter(attribute="is_first_time", value=true) | length != 0 %}
+{%- if github -%}
+{% if github.contributors | filter(attribute="is_first_time", value=true) | length != 0 %}
   ## 新贡献者 ❤️
+{% endif %}\
 {% for contributor in github.contributors | filter(attribute="is_first_time", value=true) %}
   * @{{ contributor.username }} made their first contribution
     {%- if contributor.pr_number %} in \
       [#{{ contributor.pr_number }}]({{ self::remote_url() }}/pull/{{ contributor.pr_number }}) \
     {%- endif %}
 {%- endfor -%}
-{%- endif -%}
+{%- endif %}
 """
 
+# 尾部
 footer = """
 """
 
 [git]
-conventional_commits = true
-filter_unconventional = false
+# 过滤提交
+conventional_commits = true # 使用约定式提交格式
+filter_unconventional = false # 不过滤非约定式提交
+# 启用完整的 commit 信息
 split_commits = false
+# 保留完整的 commit body
 protect_breaking_commits = false
 commit_parsers = [
     { message = "^feat", group = "<!-- 0 -->✨ 新功能" },
@@ -123,8 +87,12 @@ commit_parsers = [
     { message = "^revert", group = "<!-- 10 -->◀️ 撤销" },
 ]
 
+# 忽略这些提交
 ignore_tags = "rc"
+
+# 排序规则
 sort_commits = "oldest"
 
+# 启用GitHub集成
 [git.github]
 commits = true
