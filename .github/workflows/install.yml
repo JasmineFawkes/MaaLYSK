@@ -297,3 +297,12 @@ jobs:
           gh workflow run --repo $GITHUB_REPOSITORY mirrorchyan_release_note.yml -f tag=${{ needs.meta.outputs.tag }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Trigger Alist Distribution (async)
+        if: github.event_name == 'release'
+        shell: bash
+        run: |
+          # 异步触发 Alist 分发，不等待结果
+          gh workflow run alist-distribution.yml --repo ${{ github.repository }} -f tag=${{ needs.meta.outputs.tag }} -f from_install=true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
