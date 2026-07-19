@@ -11,6 +11,7 @@
 		{
 			"name": "✉️邮箱领取",
 			"entry": "进入邮箱领取",
+			"description": "自动领取所有邮件奖励",
 			"default_check": false
 		},
 		{
