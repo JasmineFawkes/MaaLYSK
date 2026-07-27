@@ -603,7 +603,7 @@ function scrollToSection(id: string) {
 
 // ===================== LIFECYCLE =====================
 function loadFromJSON() {
-  const jsonPath = '/zh_cn/develop/2.2-emoji-usage.json'
+  const jsonPath = '/zh_cn/develop/2.2-emoji-usage.json?_t=' + Date.now()
   fetch(jsonPath)
     .then((r) => r.json())
     .then((data) => {
