@@ -15,7 +15,7 @@ import lightTheme from "./theme/shiki/light.json";
 import darkTheme from "./theme/shiki/dark.json";
 
 const noticeDir = path.resolve(process.cwd(), "docs", "zh_cn", "notice");
-const emojiUsageJson = path.resolve(process.cwd(), "docs", "zh_cn", "develop", "2.2-emoji-usage.json");
+const emojiUsageJson = path.resolve(process.cwd(), "docs", "public", "zh_cn", "develop", "2.2-emoji-usage.json");
 
 export default defineConfig({
     ...siteConfig,
@@ -69,7 +69,7 @@ export default defineConfig({
                         let body = "";
                         req.on("data", (chunk: string) => { body += chunk; });
                         req.on("end", async () => {
-                            const filePath = "docs/zh_cn/develop/2.2-emoji-usage.json";
+                            const filePath = "docs/public/zh_cn/develop/2.2-emoji-usage.json";
                             const localPath = path.resolve(process.cwd(), filePath);
 
                             // 1. Always write to local file first

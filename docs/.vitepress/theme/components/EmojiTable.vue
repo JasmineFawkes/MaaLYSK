@@ -386,7 +386,7 @@ const usedItems = computed(() => {
 // ===================== GITHUB API SAVE =====================
 const GITHUB_OWNER = 'Witty36'
 const GITHUB_REPO = 'MaaLYSK'
-const SAVE_FILE_PATH = 'docs/zh_cn/develop/2.2-emoji-usage.json'
+const SAVE_FILE_PATH = 'docs/public/zh_cn/develop/2.2-emoji-usage.json'
 const SAVE_BRANCH = 'main'
 
 async function commitToGitHubAPI(token: string, content: string): Promise<{ newFile: boolean }> {
