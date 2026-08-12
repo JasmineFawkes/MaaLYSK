@@ -426,7 +426,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": "feature/garden_导航回花园页面（花园）.png",
+				"template": "garden/导航回花园页面（花园）.png",
 				"green_mask": true,
 				"threshold": 0.3,
 				"roi": [57, 17, 35, 36]
@@ -443,7 +443,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": "feature/garden_导航回花园页面（花园）.png",
+				"template": "garden/导航回花园页面（花园）.png",
 				"green_mask": true,
 				"threshold": 0.3,
 				"roi": [62, 21, 26, 33]

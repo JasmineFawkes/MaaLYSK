@@ -18,7 +18,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_家园任务.png"],
+				"template": ["garden/家园任务.png"],
 				"roi": [1174, 609, 81, 97]
 			}
 		},
@@ -28,7 +28,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_otto记录.png"],
+				"template": ["garden/otto记录.png"],
 				"roi": [1090, 43, 45, 48]
 			}
 		},
@@ -42,7 +42,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_otto记录界面.png"],
+				"template": ["garden/otto记录界面.png"],
 				"roi": [950, 44, 165, 58]
 			}
 		},
@@ -72,7 +72,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_花朵照料标记.png"],
+				"template": ["garden/花朵照料标记.png"],
 				"roi": [98, 303, 1241, 407]
 			}
 		},
@@ -82,7 +82,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_花朵照料标记.png"],
+				"template": ["garden/花朵照料标记.png"],
 				"roi": [98, 303, 1241, 407]
 			}
 		},
@@ -274,7 +274,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_空花坛.png"],
+				"template": ["garden/空花坛.png"],
 				"roi": [411, 86, 715, 598],
 				"threshold": 0.85
 			}
@@ -291,7 +291,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_空花坛.png"],
+				"template": ["garden/空花坛.png"],
 				"roi": [411, 86, 715, 598],
 				"threshold": 0.85
 			}
@@ -414,7 +414,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_可种植.png"],
+				"template": ["garden/可种植.png"],
 				"roi": [1042, 617, 200, 67],
 				"threshold": 0.85
 			}
@@ -508,7 +508,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_空花坛.png"],
+				"template": ["garden/空花坛.png"],
 				"roi": [411, 86, 715, 598],
 				"threshold": 0.85
 			}
@@ -525,7 +525,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_空花坛.png"],
+				"template": ["garden/空花坛.png"],
 				"roi": [411, 86, 715, 598],
 				"threshold": 0.85
 			}
@@ -647,7 +647,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_可种植.png"],
+				"template": ["garden/可种植.png"],
 				"roi": [1042, 617, 200, 67],
 				"threshold": 0.85
 			}

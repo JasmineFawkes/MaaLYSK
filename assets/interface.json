@@ -65,6 +65,7 @@
 		"resource/tasks/Phone_Telephone.json",
 		"resource/tasks/QualityTime.json",
 		"resource/tasks/FeatureTask.json",
+		"resource/tasks/GardenTask.json",
 		"resource/tasks/EventTask.json",
 		"resource/tasks/CloseLYSK.json"
 	],
@@ -167,7 +168,10 @@
 					"name": "🌳家园周常"
 				},
 				{
-					"name": "💐花朵交育"
+					"name": "🌾花朵交育"
+				},
+				{
+					"name": "🏕️家园-生态委派"
 				},
 				{
 					"name": "📲自动读短信"
