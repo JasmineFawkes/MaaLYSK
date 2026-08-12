@@ -4,7 +4,57 @@
 			"name": "💤恋与深空关闭",
 			"entry": "关闭游戏",
 			"controller": ["ADB模拟器"],
+			"option": ["选择关闭游戏版本"],
 			"default_check": false
 		}
-	]
+	],
+	"option": {
+		"选择关闭游戏版本": {
+			"type": "select",
+			"cases": [
+				{
+					"name": "恋与深空官服",
+					"pipeline_override": {
+						"关闭恋与深空": {
+							"action": {
+								"type": "StopApp",
+								"param": {
+									"package": "com.papegames.lysk.cn"
+								}
+							},
+							"focus": "关闭恋与深空官服"
+						}
+					}
+				},
+				{
+					"name": "恋与深空国际服",
+					"pipeline_override": {
+						"关闭恋与深空": {
+							"action": {
+								"type": "StopApp",
+								"param": {
+									"package": "com.papegames.lysk.en"
+								}
+							},
+							"focus": "关闭恋与深空en服"
+						}
+					}
+				},
+				{
+					"name": "恋与深空日服",
+					"pipeline_override": {
+						"关闭恋与深空": {
+							"action": {
+								"type": "StopApp",
+								"param": {
+									"package": "com.papegames.lysk.jp"
+								}
+							},
+							"focus": "关闭恋与深空日服"
+						}
+					}
+				}
+			]
+		}
+	}
 }
