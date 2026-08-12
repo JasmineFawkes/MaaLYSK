@@ -2,6 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import { emojiSections } from '../docs/.vitepress/theme/components/emojiData.ts';
 
+// ── Parse JSON with // comment support ──
+function parseJSONC(text) {
+  const stripped = text.replace(/^\s*\/\/.*$/gm, '');
+  return JSON.parse(stripped);
+}
+
 // ── Auto-detect emojis from interface.json task names ──
 function extractEmoji(taskName) {
   const m = taskName.match(/^[\p{Emoji}️‍]+/u);
@@ -10,7 +16,7 @@ function extractEmoji(taskName) {
 
 function collectTaskNames(interfacePath) {
   const root = path.dirname(interfacePath);
-  const iface = JSON.parse(fs.readFileSync(interfacePath, 'utf-8'));
+  const iface = parseJSONC(fs.readFileSync(interfacePath, 'utf-8'));
   const names = new Set();
 
   // 1. From inline presets
@@ -25,11 +31,25 @@ function collectTaskNames(interfacePath) {
     try {
       const taskPath = path.resolve(root, imp);
       if (!fs.existsSync(taskPath)) continue;
-      const taskFile = JSON.parse(fs.readFileSync(taskPath, 'utf-8'));
+      const taskFile = parseJSONC(fs.readFileSync(taskPath, 'utf-8'));
       for (const t of (taskFile.task || [])) {
         if (t.name) names.add(t.name);
       }
     } catch { /* skip unreadable import */ }
+  }
+
+  // 3. Fallback: glob all task JSON files (catches tasks not yet in import/preset)
+  const tasksDir = path.join(root, 'resource/tasks');
+  if (fs.existsSync(tasksDir)) {
+    for (const f of fs.readdirSync(tasksDir)) {
+      if (!f.endsWith('.json')) continue;
+      try {
+        const taskFile = parseJSONC(fs.readFileSync(path.join(tasksDir, f), 'utf-8'));
+        for (const t of (taskFile.task || [])) {
+          if (t.name) names.add(t.name);
+        }
+      } catch { /* skip */ }
+    }
   }
 
   return [...names];
@@ -72,12 +92,24 @@ for (let si = 0; si < emojiSections.length; si++) {
 const unmatched = [...usedEmojis].filter(e => !matchedEmojis.has(e));
 console.log('Matched:', used.length, '| Unmatched:', unmatched.length, unmatched.join(' '));
 
+// ── Merge with existing file (preserve manual additions from website) ──
+const outPath = 'docs/public/zh_cn/develop/2.2-emoji-usage.json';
+const merged = new Set(used);
+if (fs.existsSync(outPath)) {
+  try {
+    const existing = JSON.parse(fs.readFileSync(outPath, 'utf-8'));
+    for (const e of (existing.used || [])) merged.add(e);
+  } catch { /* corrupt file, ignore */ }
+}
+if (merged.size > used.length) {
+  console.log('Preserved', merged.size - used.length, 'manual entries from existing file');
+}
+
 const payload = {
   version: 1,
-  used,
+  used: [...merged].sort(),
   lastSaved: new Date().toISOString(),
 };
 
-const outPath = 'docs/public/zh_cn/develop/2.2-emoji-usage.json';
 fs.writeFileSync(outPath, JSON.stringify(payload, null, 2), 'utf-8');
-console.log('Done:', outPath);
+console.log('Done:', outPath, '(' + merged.size + ' total entries)');
