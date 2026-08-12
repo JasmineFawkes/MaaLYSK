@@ -1,7 +1,22 @@
-deps/
+# Exclude everything by default
+*
+
+# Re-include directories for traversal
+!*/
+
+# Only format JSON files
+!*.json
+
+# Still exclude these
+.agents/
+.claude/
+.vitepress/
+.vscode/
 assets/MaaCommonAssets/
+deps/
+docs/public/
+.github/workflows/
+install/
 node_modules/
 package-lock.json
-docs/.vitepress/cache/
-docs/.vitepress/dist/
-.github/workflows/
+tsconfig.json

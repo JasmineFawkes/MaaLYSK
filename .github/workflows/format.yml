@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   format:
@@ -51,10 +52,35 @@ jobs:
       - name: Install dependencies
         run: npm ci --ignore-scripts
 
-      - name: Run formatter
+      - name: Run formatter (check only, PR)
+        if: github.event_name == 'pull_request_target'
+        id: format-check
+        continue-on-error: true
+        run: npm run format:check
+
+      - name: Comment formatting failure on PR
+        if: github.event_name == 'pull_request_target' && steps.format-check.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} --body '⚠️ **Code formatting check failed.**
+
+          Please run `npm run format` locally and push the changes.
+
+          > **Note:** Make sure your branch has the latest `.prettierignore` and `.prettierrc` from `${{ github.base_ref }}`, otherwise you may get extra or inconsistent formatting changes.'
+
+      - name: Fail on formatting issues
+        if: github.event_name == 'pull_request_target' && steps.format-check.outcome == 'failure'
+        run: |
+          echo "::error::Formatting check failed. Please run 'npm run format' locally."
+          exit 1
+
+      - name: Run formatter (auto-fix, schedule / manual)
+        if: github.event_name != 'pull_request_target'
         run: npm run format
 
       - name: Commit format changes
+        if: github.event_name != 'pull_request_target'
         run: |
           if [[ -z "$(git status --porcelain)" ]]; then
             echo "No formatting changes."
@@ -64,8 +90,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "style: auto format code [skip changelog]" -m "Triggered by ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          if [[ "${{ github.event_name }}" == "pull_request_target" ]]; then
-            git push origin HEAD:${{ github.head_ref }}
-          else
-            git push
-          fi
+          git push
