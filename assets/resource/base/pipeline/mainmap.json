@@ -45,6 +45,7 @@
 			"[JumpBack]导航回主页面（主线）",
 			"[JumpBack]导航回主页面（商城）",
 			"[JumpBack]导航回主页面（芯核分解）",
+			"[JumpBack]导航回主页面(花园)",
 			"[JumpBack]退出点击popop"
 		]
 	},
@@ -134,6 +135,7 @@
 			"确定返回手账保存popop",
 			"确认返回教学引导popop",
 			"确定返回剧情popop",
+			"导航回主页面(花园)",
 			"退出点击popop"
 		]
 	},
@@ -413,6 +415,41 @@
 			"type": "Click",
 			"param": {
 				"target_offset": [3, 5, -6, -10]
+			}
+		},
+		"next": ["返回等待"]
+	},
+	"导航回主页面(花园)": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": "garden/导航回花园页面（花园）.png",
+				"green_mask": true,
+				"threshold": 0.3,
+				"roi": [62, 21, 26, 33]
+			}
+		},
+		"pre_delay": 500,
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"next": ["花园二次退出确认"]
+	},
+	"花园二次退出确认": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["确认"],
+				"threshold": 0.3,
+				"roi": [375, 217, 528, 286]
+			}
+		},
+		"pre_delay": 500,
+		"action": {
+			"type": "Click",
+			"param": {
+				"target": true
 			}
 		},
 		"next": ["返回等待"]

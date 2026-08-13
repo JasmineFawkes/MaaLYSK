@@ -56,41 +56,6 @@
 		},
 		"next": ["返回等待"]
 	},
-	"导航回主页面(花园)": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": "garden/导航回花园页面（花园）.png",
-				"green_mask": true,
-				"threshold": 0.3,
-				"roi": [62, 21, 26, 33]
-			}
-		},
-		"pre_delay": 500,
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"next": ["花园二次退出确认"]
-	},
-	"花园二次退出确认": {
-		"recognition": {
-			"type": "OCR",
-			"param": {
-				"expected": ["确认"],
-				"threshold": 0.3,
-				"roi": [375, 217, 528, 286]
-			}
-		},
-		"pre_delay": 500,
-		"action": {
-			"type": "Click",
-			"param": {
-				"target": true
-			}
-		},
-		"next": ["返回等待"]
-	},
 	"家园_跳过照料动画": {
 		"recognition": {
 			"type": "OCR",
