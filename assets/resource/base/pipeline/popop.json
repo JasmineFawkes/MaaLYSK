@@ -907,16 +907,5 @@
 			}
 		},
 		"next": ["返回等待"]
-	},
-	"退出花园弹窗popop": {
-		"recognition": {
-			"type": "DirectHit",
-			"param": {}
-		},
-		"action": {
-			"type": "Click",
-			"param": {"target": [626, 93, 15, 12]}
-		},
-		"next": ["stop"]
 	}
 }
