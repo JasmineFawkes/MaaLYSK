@@ -116,14 +116,17 @@
 		"focus": {
 			"Node.Recognition.Succeeded": "开始抓二爪娃娃"
 		},
-		"timeout": 30000,
+		"timeout": 40000,
 		"next": [
 			"娃娃机结算退出继续",
 			"尝试抢男主娃娃",
 			"[JumpBack]娃娃机对话_上_我来抓",
 			"[JumpBack]娃娃机对话_下_我来抓",
 			"[JumpBack]过剧情",
-			"[JumpBack]抓娃娃绿色按钮"
+			"[JumpBack]抓娃娃绿色按钮",
+			"[JumpBack]退出牵绊度提升popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]退出新娃娃获得popop"
 		],
 		"on_error": ["null"]
 	},
@@ -148,7 +151,10 @@
 			"[JumpBack]娃娃机对话_下_我来抓",
 			"[JumpBack]娃娃机换人切换",
 			"[JumpBack]娃娃机切换被拒绝",
-			"[JumpBack]过剧情"
+			"[JumpBack]过剧情",
+			"[JumpBack]退出牵绊度提升popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]退出新娃娃获得popop"
 		],
 		"on_error": ["娃娃机返回"]
 	},
