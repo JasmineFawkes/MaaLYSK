@@ -94,22 +94,38 @@ console.log('Matched:', used.length, '| Unmatched:', unmatched.length, unmatched
 
 // ── Merge with existing file (preserve manual additions from website) ──
 const outPath = 'docs/public/zh_cn/develop/2.2-emoji-usage.json';
-const merged = new Set(used);
+let existingUsed = [];
 if (fs.existsSync(outPath)) {
   try {
     const existing = JSON.parse(fs.readFileSync(outPath, 'utf-8'));
-    for (const e of (existing.used || [])) merged.add(e);
+    existingUsed = existing.used || [];
   } catch { /* corrupt file, ignore */ }
 }
+
+const merged = new Set(used);
+for (const e of existingUsed) merged.add(e);
 if (merged.size > used.length) {
   console.log('Preserved', merged.size - used.length, 'manual entries from existing file');
 }
 
+const sorted = [...merged].sort();
+
+// Compare used list only (ignore lastSaved timestamp)
+const prevSorted = [...existingUsed].sort();
+const changed =
+  sorted.length !== prevSorted.length ||
+  sorted.some((e, i) => e !== prevSorted[i]);
+
+if (!changed) {
+  console.log('No change to used list, skipping write');
+  process.exit(0);
+}
+
 const payload = {
   version: 1,
-  used: [...merged].sort(),
+  used: sorted,
   lastSaved: new Date().toISOString(),
 };
 
 fs.writeFileSync(outPath, JSON.stringify(payload, null, 2), 'utf-8');
-console.log('Done:', outPath, '(' + merged.size + ' total entries)');
+console.log('Done:', outPath, '(' + sorted.length + ' total entries)');
