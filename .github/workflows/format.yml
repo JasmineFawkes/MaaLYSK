@@ -65,10 +65,12 @@ jobs:
         run: |
           gh pr comment ${{ github.event.pull_request.number }} --body '⚠️ **Code formatting check failed.**
 
-          Please run `npm run format` locally and push the changes.
+          Run `npm run format` locally and push the changes to fix the problem, though this step is optional.
 
-          > **Note:** Make sure your branch has the latest `.prettierignore` and `.prettierrc` from `${{ github.base_ref }}`, otherwise you may get extra or inconsistent formatting changes.'
-
+          > **Note:** The formatting will be applied automatically after the PR is merged.
+          >
+          > If you choose to format, make sure your branch has the latest `.prettierignore` and `.prettierrc` from `${{ github.base_ref }}` to avoid extra or inconsistent changes.'
+     
       - name: Fail on formatting issues
         if: github.event_name == 'pull_request_target' && steps.format-check.outcome == 'failure'
         run: |
