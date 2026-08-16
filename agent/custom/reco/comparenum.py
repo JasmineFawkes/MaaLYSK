@@ -79,18 +79,18 @@ class CompareNum(CustomRecognition):
         try:
             params = parse_params(argv.custom_recognition_param, "recognition")
         except ValueError as error:
-            logger.error("CompareNum: %s", error)
+            logger.debug("CompareNum: %s", error)
             return None
 
         node = params["recognition"]
         if not isinstance(node, str) or not node.strip():
-            logger.error("CompareNum: recognition 必须是非空字符串")
+            logger.debug("CompareNum: 缺少识别节点名（recognition）")
             return None
         node = node.strip()
 
         roi = params.get("roi")
         if roi is not None and (not isinstance(roi, (list, tuple)) or len(roi) != 4):
-            logger.error(f"CompareNum: roi 必须为 [x, y, w, h]，got {roi!r}")
+            logger.debug(f"CompareNum: roi 必须为 [x, y, w, h]，当前：{roi!r}")
             return None
 
         # 区间模式：给了 min/max 任一即进入；否则走单值比较模式
@@ -105,36 +105,36 @@ class CompareNum(CustomRecognition):
             lower_comparator = _COMPARATORS.get(min_op)
             upper_comparator = _COMPARATORS.get(max_op)
             if min_op not in (">=", ">"):
-                logger.error(f"CompareNum: min_op 仅支持 >= 或 >，got {min_op!r}")
+                logger.debug(f"CompareNum: min_op 仅支持 >= 或 >，当前：{min_op!r}")
                 return None
             if max_op not in ("<=", "<"):
-                logger.error(f"CompareNum: max_op 仅支持 <= 或 <，got {max_op!r}")
+                logger.debug(f"CompareNum: max_op 仅支持 <= 或 <，当前：{max_op!r}")
                 return None
             try:
                 lower = float(min_value) if min_value is not None else None
                 upper = float(max_value) if max_value is not None else None
             except (TypeError, ValueError):
-                logger.error(
-                    f"CompareNum: min/max 必须是数字，got min={min_value!r}, max={max_value!r}"
+                logger.debug(
+                    f"CompareNum: min/max 必须是数字，当前 min={min_value!r}，max={max_value!r}"
                 )
                 return None
             if lower is not None and upper is not None and lower > upper:
-                logger.error(f"CompareNum: min({lower:g}) 不能大于 max({upper:g})")
+                logger.debug(f"CompareNum: min({lower:g}) 不能大于 max({upper:g})")
                 return None
         else:
             expected = params.get("expected")
             operator = params.get("operator")
             if expected is None or operator is None:
-                logger.error("CompareNum: 区间模式需 min/max，单值模式需 expected+operator")
+                logger.debug("CompareNum: 配置不完整：区间模式需 min/max，单值模式需 expected+operator")
                 return None
             comparator = _COMPARATORS.get(operator)
             if comparator is None:
-                logger.error(f"CompareNum: 不支持的操作符 {operator!r}（支持 >, >=, <, <=）")
+                logger.debug(f"CompareNum: 不支持的比较符 {operator!r}（支持 >, >=, <, <=）")
                 return None
             try:
                 expected_number = float(expected)
             except (TypeError, ValueError):
-                logger.error(f"CompareNum: expected 必须是数字，got {expected!r}")
+                logger.debug(f"CompareNum: expected 必须是数字，当前：{expected!r}")
                 return None
 
         # 通过 pipeline override 把 roi 交给识别节点，而不是手动裁剪小图
@@ -150,27 +150,15 @@ class CompareNum(CustomRecognition):
         text = ocr_text(detail)
         match = _NUMBER_PATTERN.search(text or "")
         if match is None:
-            logger.info(f"CompareNum: 识别文本 {text!r} 中未找到数字")
             return None
 
         recognized_number = float(match.group())
 
         if range_mode:
             if lower is not None and not lower_comparator(recognized_number, lower):
-                logger.info(
-                    f"CompareNum: {recognized_number:g} {min_op} {lower:g} 不成立，未命中"
-                )
                 return None
             if upper is not None and not upper_comparator(recognized_number, upper):
-                logger.info(
-                    f"CompareNum: {recognized_number:g} {max_op} {upper:g} 不成立，未命中"
-                )
                 return None
-            lower_text = f"{lower:g}" if lower is not None else "-∞"
-            upper_text = f"{upper:g}" if upper is not None else "+∞"
-            logger.info(
-                f"CompareNum: {recognized_number:g} 满足 {min_op} {lower_text} 且 {max_op} {upper_text}"
-            )
             result_detail: dict[str, Any] = {
                 "recognized": recognized_number,
                 "min": lower,
@@ -182,9 +170,6 @@ class CompareNum(CustomRecognition):
         else:
             if not comparator(recognized_number, expected_number):
                 return None
-            logger.info(
-                f"CompareNum: {recognized_number:g} {operator} {expected_number:g} 成立"
-            )
             result_detail = {
                 "recognized": recognized_number,
                 "expected": expected_number,

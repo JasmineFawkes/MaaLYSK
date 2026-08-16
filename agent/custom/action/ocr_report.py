@@ -41,23 +41,23 @@ class OcrReport(CustomAction):
         try:
             params = parse_params(argv.custom_action_param, "recognition")
         except ValueError as error:
-            logger.error("OcrReport: %s", error)
+            logger.error(f"【OcrReport】参数无效：{error}")
             return CustomAction.RunResult(success=False)
 
         node = params["recognition"]
         if not isinstance(node, str) or not node.strip():
-            logger.error("OcrReport: recognition 必须是非空字符串")
+            logger.error("【OcrReport】缺少识别节点名（recognition）")
             return CustomAction.RunResult(success=False)
         node = node.strip()
 
         image = context.tasker.controller.post_screencap().wait().get()
         if image is None:
-            logger.error("OcrReport: 截图失败")
+            logger.error("【OcrReport】截图失败，无法识别")
             return CustomAction.RunResult(success=False)
 
         detail = context.run_recognition(node, image)
         if not is_hit(detail):
-            logger.info(f"OcrReport: 节点 {node} 未命中")
+            logger.info(f"【OcrReport】节点 {node} 未识别到目标")
             return CustomAction.RunResult(success=True)
 
         text = ocr_text(detail)
@@ -91,4 +91,4 @@ class OcrReport(CustomAction):
             with path.open("a", encoding="utf-8") as file:
                 file.write(f"{timestamp} {message}\n")
         except Exception:
-            logger.exception(f"OcrReport: 写入导出文件失败 {path}")
+            logger.exception(f"【OcrReport】写入导出文件失败 {path}")
