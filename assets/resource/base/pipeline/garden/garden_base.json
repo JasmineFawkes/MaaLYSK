@@ -1,0 +1,93 @@
+{
+	"点击家园": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["家园", "园"],
+				"roi": [156, 1150, 91, 91]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"post_delay": 90000,
+		"next": ["家园页面确认"],
+		"on_error": ["null"]
+	},
+	"家园页面确认": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": ["装修", "修"],
+				"roi": [1084, 666, 59, 29]
+			}
+		},
+		"focus": "已在家园页面",
+		"next": []
+	},
+	"退出花园弹窗popop": {
+		"recognition": {
+			"type": "DirectHit",
+			"param": {}
+		},
+		"action": {
+			"type": "Click",
+			"param": {
+				"target": [626, 93, 15, 12]
+			}
+		},
+		"next": ["stop"]
+	},
+	"导航回花园页面（花园）": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": "garden/导航回花园页面（花园）.png",
+				"green_mask": true,
+				"threshold": 0.3,
+				"roi": [57, 17, 35, 36]
+			}
+		},
+		"pre_delay": 500,
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"next": ["返回等待"]
+	},
+	"家园_跳过照料动画": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": "跳过",
+				"roi": [1145, 26, 98, 27]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"timeout": 3000,
+		"focus": "已跳过动画",
+		"next": [],
+		"post_delay": 5000
+	},
+	"家园_跳过收获动画": {
+		"recognition": {
+			"type": "OCR",
+			"param": {
+				"expected": "跳过",
+				"roi": [1145, 26, 98, 27]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"timeout": 3000,
+		"focus": "已跳过动画",
+		"next": ["[JumpBack]导航回花园页面（花园）"],
+		"post_delay": 5000
+	}
+}

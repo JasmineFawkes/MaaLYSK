@@ -13,13 +13,14 @@
 			"entry": "进入主页面切换账号",
 			"controller": ["ADB模拟器", "PlayCover"],
 			"default_check": false,
-			"option": ["游戏版本", "账号前3位"],
+			"option": ["请选择游戏版本", "账号前3位"],
 			"description": "使用指定账号登录时,必须保证<span style=\"color:red\">分辨率为900x1600-320DPI-手机</span>，"
 		}
 	],
 	"option": {
 		"请选择游戏版本": {
 			"type": "select",
+			"label": "游戏版本",
 			"cases": [
 				{
 					"name": "恋与深空官服",
@@ -28,6 +29,28 @@
 							"enabled": true
 						},
 						"sub_启动深空官服": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "恋与深空国际服",
+					"pipeline_override": {
+						"恋与深空国际服": {
+							"enabled": true
+						},
+						"sub_启动深空国际服": {
+							"enabled": true
+						}
+					}
+				},
+				{
+					"name": "恋与深空日服",
+					"pipeline_override": {
+						"恋与深空日服": {
+							"enabled": true
+						},
+						"sub_启动深空日服": {
 							"enabled": true
 						}
 					}
@@ -54,22 +77,6 @@
 						}
 					},
 					"option": ["账号前3位"]
-				}
-			]
-		},
-		"游戏版本": {
-			"type": "select",
-			"cases": [
-				{
-					"name": "恋与深空官服",
-					"pipeline_override": {
-						"恋与深空官服": {
-							"enabled": true
-						},
-						"sub_启动深空官服": {
-							"enabled": true
-						}
-					}
 				}
 			]
 		},

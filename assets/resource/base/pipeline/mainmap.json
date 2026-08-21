@@ -45,6 +45,7 @@
 			"[JumpBack]导航回主页面（主线）",
 			"[JumpBack]导航回主页面（商城）",
 			"[JumpBack]导航回主页面（芯核分解）",
+			"[JumpBack]导航回主页面(花园)",
 			"[JumpBack]退出点击popop"
 		]
 	},
@@ -94,7 +95,6 @@
 			"导航回主页面（商城）",
 			"导航回主页面（芯核分解）",
 			"导航回主页面(花园)",
-			"退出花园弹窗popop",
 			"退出点击popop"
 		]
 	},
@@ -135,8 +135,8 @@
 			"确定返回手账保存popop",
 			"确认返回教学引导popop",
 			"确定返回剧情popop",
-			"退出点击popop",
-			"退出花园弹窗popop"
+			"导航回主页面(花园)",
+			"退出点击popop"
 		]
 	},
 	"退出各类弹窗(无快乐出游退出)": {
@@ -419,31 +419,11 @@
 		},
 		"next": ["返回等待"]
 	},
-	"返回等待": {
-		"post_delay": 2000
-	},
-	"导航回花园页面（花园）": {
-		"recognition": {
-			"type": "TemplateMatch",
-			"param": {
-				"template": "feature/garden_导航回花园页面（花园）.png",
-				"green_mask": true,
-				"threshold": 0.3,
-				"roi": [57, 17, 35, 36]
-			}
-		},
-		"pre_delay": 500,
-		"action": {
-			"type": "Click",
-			"param": {}
-		},
-		"next": ["stop"]
-	},
 	"导航回主页面(花园)": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": "feature/garden_导航回花园页面（花园）.png",
+				"template": "garden/导航回花园页面（花园）.png",
 				"green_mask": true,
 				"threshold": 0.3,
 				"roi": [62, 21, 26, 33]
@@ -473,5 +453,8 @@
 			}
 		},
 		"next": ["返回等待"]
+	},
+	"返回等待": {
+		"post_delay": 2000
 	}
 }

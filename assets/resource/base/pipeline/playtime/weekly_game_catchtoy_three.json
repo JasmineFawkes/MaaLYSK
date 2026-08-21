@@ -123,7 +123,7 @@
 		"focus": {
 			"Node.Recognition.Succeeded": "他开始抓三爪娃娃"
 		},
-		"timeout": 30000,
+		"timeout": 50000,
 		"next": [
 			"娃娃机结算退出继续",
 			"[JumpBack]娃娃机对话_上_让他抓",
@@ -131,7 +131,10 @@
 			"[JumpBack]过剧情",
 			"[JumpBack]选取娃娃_三爪",
 			"[JumpBack]娃娃机鼓励点点_三爪",
-			"[JumpBack]抓娃娃页面等待_三爪"
+			"[JumpBack]抓娃娃页面等待_三爪",
+			"[JumpBack]退出牵绊度提升popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]退出新娃娃获得popop"
 		],
 		"on_error": ["null"]
 	},
@@ -317,7 +320,10 @@
 			"[JumpBack]娃娃机对话_下_让他抓",
 			"[JumpBack]娃娃机换人切换_三爪",
 			"[JumpBack]娃娃机换人_被拒绝",
-			"[JumpBack]过剧情"
+			"[JumpBack]过剧情",
+			"[JumpBack]退出牵绊度提升popop",
+			"[JumpBack]退出获得奖励popop",
+			"[JumpBack]退出新娃娃获得popop"
 		],
 		"on_error": ["娃娃机返回"]
 	},

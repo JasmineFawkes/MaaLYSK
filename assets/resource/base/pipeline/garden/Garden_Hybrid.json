@@ -3,7 +3,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_家园任务.png"],
+				"template": ["garden/家园任务.png"],
 				"roi": [1174, 609, 81, 97]
 			}
 		},
@@ -15,7 +15,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_otto记录.png"],
+				"template": ["garden/otto记录.png"],
 				"roi": [1090, 43, 45, 48]
 			}
 		},
@@ -29,7 +29,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_otto记录界面.png"],
+				"template": ["garden/otto记录界面.png"],
 				"roi": [950, 44, 165, 58]
 			}
 		},
@@ -60,7 +60,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_交育图标.png"],
+				"template": ["garden/交育图标.png"],
 				"roi": [196, 117, 865, 590]
 			}
 		},
@@ -103,7 +103,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_交育图标.png"],
+				"template": ["garden/交育图标.png"],
 				"index": -1,
 				"roi": [196, 117, 865, 590]
 			}
@@ -390,7 +390,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_开始交育标亮起.png"],
+				"template": ["garden/开始交育标亮起.png"],
 				"roi": [1027, 639, 188, 46],
 				"threshold": 0.8
 			}
@@ -406,7 +406,7 @@
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
-				"template": ["feature/garden_开始交育标亮起.png"],
+				"template": ["garden/开始交育标亮起.png"],
 				"roi": [1027, 639, 188, 46]
 			}
 		},

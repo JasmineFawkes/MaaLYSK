@@ -5,24 +5,17 @@
     "bracketSameLine": true,
     "bracketSpacing": false,
     "endOfLine": "auto",
-    "plugins": [
-        "./tools/prettier-plugin-remove-blank-lines.mjs"
-    ],
+    "plugins": ["./tools/prettier-plugin-remove-blank-lines.mjs"],
     "overrides": [
         {
-            "files": [
-                "**/*.yml",
-                "**/*.yaml"
-            ],
+            "files": ["**/*.yml", "**/*.yaml"],
             "options": {
                 "parser": "yaml",
                 "tabWidth": 2
             }
         },
         {
-            "files": [
-                "*.json"
-            ],
+            "files": ["*.json"],
             "options": {
                 "parser": "json",
                 "useTabs": true,

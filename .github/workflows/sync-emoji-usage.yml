@@ -1,0 +1,43 @@
+name: Sync Emoji Usage
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/interface.json'
+      - 'assets/resource/tasks/**/*.json'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.event.repository.fork == false && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Run emoji sync
+        run: node tools/sync-emoji-usage.mjs
+
+      - name: Commit changes
+        run: |
+          if [[ -z "$(git status --porcelain docs/public/zh_cn/develop/2.2-emoji-usage.json)" ]]; then
+            echo "emoji-usage.json is up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/public/zh_cn/develop/2.2-emoji-usage.json
+          git commit -m "chore: sync emoji usage [skip changelog]" -m "Triggered by ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          git push

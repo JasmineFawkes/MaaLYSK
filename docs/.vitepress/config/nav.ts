@@ -32,7 +32,7 @@ export const zhNav = [
         items: [
             { text: "MAA", link: "https://maa.plus/" },
             { text: "Mirror酱", link: "https://mirrorchyan.com/zh/projects?source=MaaLYSKtop&rid=MaaLYSK" },
-            { text: "MaaYuan", link: "https://maayuan.top/" },
+            { text: "MaaYuan", link: "https://maayuan.com/" },
             { text: "恋与深空bwiki", link: "https://lysk.site" },
         ],
     },
@@ -57,7 +57,7 @@ export const enNav = [
         items: [
             { text: "MAA", link: "https://maa.plus/" },
             { text: "Mirror酱", link: "https://mirrorchyan.com/zh/projects?source=MaaLYSKtop&rid=MaaLYSK" },
-            { text: "MaaYuan", link: "https://maayuan.top/" },     
+            { text: "MaaYuan", link: "https://maayuan.com/" },     
             { text: "恋与深空bwiki", link: "https://lysk.site" },
         ],
     },
