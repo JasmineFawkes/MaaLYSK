@@ -196,7 +196,7 @@ def install_requirements(mirrors: list[str]) -> bool:
         return False
 
     mirror_name, mirror_url = mirror
-    print(f"info: 正在从 {mirror_name} 安装依赖...")
+    print("info: 开始从 requirements.txt 安装依赖...")
 
     cmd = [
         sys.executable,
@@ -210,7 +210,10 @@ def install_requirements(mirrors: list[str]) -> bool:
         "-i",
         mirror_url,
     ]
-    return _run_pip_command(cmd, f"从 {requirements_path.name} 安装依赖...")
+    success = _run_pip_command(cmd, "从 requirements.txt 安装依赖")
+    if success:
+        print("info: 从 requirements.txt 安装依赖完成")
+    return success
 
 
 def deploy() -> bool:
@@ -246,7 +249,7 @@ def deploy() -> bool:
         if success:
             save_version(current_version)
             logger.info(f"✓ 依赖检查完成，版本已更新为: {current_version}")
-            print("info: 依赖安装完成")
+            print("info: 依赖检查和安装完成")
         else:
             logger.error("✗ 依赖安装失败，请手动安装后重试")
             print("error: 依赖安装失败，请手动安装后重试")
