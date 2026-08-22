@@ -39,7 +39,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": ["event/daily_get/沉烽逐霄限时任务入口.png"],
-				"roi": [504,914,166,124]
+				"roi": [504, 914, 166, 124]
 			}
 		},
 		"action": {
@@ -54,7 +54,7 @@
 			"type": "OCR",
 			"param": {
 				"expected": ["一键领取", "键领取", "领取"],
-				"roi": [268,1017,180,65]
+				"roi": [268, 1017, 180, 65]
 			}
 		},
 		"action": {
