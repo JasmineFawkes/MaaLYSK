@@ -39,11 +39,18 @@ def run_agent() -> int:
 
 
 def main() -> int:
-    # 源码/测试模式（存在 .git）跳过部署检查
-    if not (Path(project_root_dir) / ".git").exists():
-        if not deploy():
-            print("error: 部署检查失败，程序退出", file=sys.stderr)
-            return 1
+    # Development projects keep interface.json under assets.
+    project_root = Path(project_root_dir)
+    is_dev_mode = not (project_root / "interface.json").is_file() and (
+        project_root / "assets" / "interface.json"
+    ).is_file()
+
+    if not deploy():
+        print("error: deployment check failed", file=sys.stderr)
+        return 1
+
+    if is_dev_mode:
+        os.chdir(project_root / "assets")
 
     return run_agent()
 

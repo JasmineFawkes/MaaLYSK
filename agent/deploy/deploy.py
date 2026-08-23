@@ -69,9 +69,16 @@ def get_main_py_path() -> Path:
 def get_interface_version() -> str:
     """从 interface.json 中读取版本号。"""
     main_py_path = get_main_py_path()
-    interface_path = main_py_path.parent.parent / "interface.json"
+    project_root = main_py_path.parent.parent
+    interface_path = project_root / "interface.json"
 
-    if not interface_path.exists():
+    # 开发目录的 interface.json 可能保留旧的发布版本，不能用它作为当前版本。
+    if not interface_path.is_file() and (
+        project_root / "assets" / "interface.json"
+    ).is_file():
+        return "DEBUG"
+
+    if not interface_path.is_file():
         raise FileNotFoundError(f"无法找到 interface.json 文件: {interface_path}")
 
     with open(interface_path, "r", encoding="utf-8") as f:
@@ -196,7 +203,7 @@ def install_requirements(mirrors: list[str]) -> bool:
         return False
 
     mirror_name, mirror_url = mirror
-    print(f"info: 正在从 {mirror_name} 安装依赖...")
+    print("info: 开始从 requirements.txt 安装依赖...")
 
     cmd = [
         sys.executable,
@@ -210,7 +217,10 @@ def install_requirements(mirrors: list[str]) -> bool:
         "-i",
         mirror_url,
     ]
-    return _run_pip_command(cmd, f"从 {requirements_path.name} 安装依赖...")
+    success = _run_pip_command(cmd, "从 requirements.txt 安装依赖")
+    if success:
+        print("info: 从 requirements.txt 安装依赖完成")
+    return success
 
 
 def deploy() -> bool:
@@ -226,27 +236,29 @@ def deploy() -> bool:
         logger.info(f"当前 interface_version: {current_version}")
 
         # 读取已保存的版本
-        saved_version = get_saved_version()
+        is_dev_mode = current_version == "DEBUG"
+        saved_version = None if is_dev_mode else get_saved_version()
         print(f"info: 当前资源版本: {current_version}, 上次运行版本: {saved_version or '未知'}")
 
-        if saved_version == current_version:
+        if is_dev_mode:
+            logger.info("开发模式，开始安装/更新依赖")
+        elif saved_version == current_version:
             logger.info(f"版本一致 (v{saved_version})，跳过依赖检查")
             logger.info("=" * 50)
             print("info: 版本一致，跳过依赖检查")
             return True
-
-        if saved_version:
-            logger.info(f"版本已更新: {saved_version} -> {current_version}")
         else:
-            logger.info("首次运行，开始依赖检查...")
+            logger.info("版本不匹配或上次版本未知，开始安装/更新依赖")
+            print("info: 版本不匹配或上次版本未知，开始安装/更新依赖")
 
         # 检查并安装依赖
         success = install_requirements(PIP_MIRRORS)
 
         if success:
-            save_version(current_version)
+            if not is_dev_mode:
+                save_version(current_version)
             logger.info(f"✓ 依赖检查完成，版本已更新为: {current_version}")
-            print("info: 依赖安装完成")
+            print("info: 依赖检查和安装完成")
         else:
             logger.error("✗ 依赖安装失败，请手动安装后重试")
             print("error: 依赖安装失败，请手动安装后重试")
