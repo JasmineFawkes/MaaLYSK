@@ -22,7 +22,7 @@
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["晓色长路","晓色","长路"],
+				"expected": ["晓色长路", "晓色", "长路"],
 				"roi": [10, 1179, 701, 79]
 			}
 		},
