@@ -9,23 +9,23 @@
 		},
 		{
 			"name": "🛍️限时活动商城领取",
-			//"entry": "stop",
-			"entry": "进入活动商城领取",
+			"entry": "stop",
+			//"entry": "进入活动商城领取",
 			"default_check": false,
-			"description": "<span style=\"color:orange\">当前版本：夏以昼2026生日</span><br>请尽量确保代币足够再使用，不然会卡住"
+			"description": "<span style=\"color:orange\">当前版本：目前关闭中</span><br>请尽量确保代币足够再使用，不然会卡住"
 		},
 		{
 			"name": "🌟限时活动每日领取",
-			//	"entry": "stop",
-			"entry": "进入限时活动",
+			"entry": "stop",
+			//	"entry": "进入限时活动",
 			"default_check": false,
 			//"option": ["韶华宴岁领取", "吉财临门领取", "金叶盈福领取"],
-			"description": "<span style=\"color:orange\">当前版本：黎深2026生日</span><br>限时活动领取每日任务奖励，初步适配了进入活动读剧情，如果有问题就提前进入一次页面过下剧情"
+			"description": "<span style=\"color:orange\">当前版本：目前关闭中</span><br>限时活动领取每日任务奖励，初步适配了进入活动读剧情，如果有问题就提前进入一次页面过下剧情"
 		},
 		{
 			"name": "✨限时活动读剧情",
-			//"entry": "stop",
-			"entry": "进入生日剧情",
+			"entry": "stop",
+			//"entry": "进入生日剧情",
 			"option": ["选择读的生日剧情"],
 			"default_check": false,
 			"description": "<span style=\"color:orange\">当前版本：目前关闭中</span><br><span style=\"color:red\">尽量在剧情全解锁后再使用，如有未解锁剧情，不会自动结束，最好单独进行！</span><br>限时活动读剧情，初步适配了进入活动读剧情，如果有问题就提前进入一次剧情页面过下剧情。<br><span style=\"color:red\">撩动氤氲划动雾气如果划不上，手动划一下即可。</span>",
@@ -72,15 +72,6 @@
 			//"entry": "stop",
 			"entry": "进入限时活动小游戏",
 			"default_check": false,
-			//	"option": ["刷到xx分停止", "叮咚奇跃参数自定义"],
-			"description": "<span style=\"color:orange\">当前版本：软绒奇境-纷乱清点</span>1、由于个别电脑卡顿可能会提前结束任务，重新开始就好<br>2、请单独运行此任务，否则后续任务可能无法进行<br>3、最好先手打一遍关卡解锁第一关，尽量只在第一关挂。后面关卡可能会有识别问题并卡住"
-		},
-		{
-			"name": "🍉限时活动分线小游戏",
-			//"entry": "stop",
-			"entry": "进入共留花期",
-			"default_check": false,
-			//	"option": ["刷到xx分停止", "叮咚奇跃参数自定义"],
 			"option": ["选择男主技能"],
 			"description": "<span style=\"color:orange\">当前版本：共留花期，需过完引导并手动完成关卡一后使用</span>1、由于个别电脑卡顿可能会提前结束任务，重新开始就好<br>2、请单独运行此任务，否则后续任务可能无法进行",
 			"pipeline_override": {
