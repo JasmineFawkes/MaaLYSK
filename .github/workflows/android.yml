@@ -15,7 +15,7 @@ env:
   LAUNCHER_ICON: docs/public/logo.png
   RESOURCE_ROOT: assets
   MFA_REPOSITORY: MaaXYZ/MFAAvalonia
-  MFA_REF: v2.16.1-beta.3
+  MFA_REF: v2.16.1
   P4A_ENTRYPOINT: agent/main.py
   P4A_REF: v2026.05.09
   P4A_NDK_VERSION: 28.2.13676358
