@@ -74,11 +74,11 @@
 		},
 		{
 			"name": "🌈限时活动小游戏",
-			//"entry": "stop",
-			"entry": "进入限时活动小游戏",
+			"entry": "stop",
+			//"entry": "进入限时活动小游戏",
 			"default_check": false,
-			"option": ["选择男主技能"],
-			"description": "<span style=\"color:orange\">当前版本：共留花期，需过完引导并手动完成关卡一后使用</span>1、由于个别电脑卡顿可能会提前结束任务，重新开始就好<br>2、请单独运行此任务，否则后续任务可能无法进行"
+			//"option": ["选择男主技能"],
+			"description": "<span style=\"color:orange\">当前版本：目前关闭中</span>1、由于个别电脑卡顿可能会提前结束任务，重新开始就好<br>2、请单独运行此任务，否则后续任务可能无法进行"
 		}
 	],
 	"option": {
