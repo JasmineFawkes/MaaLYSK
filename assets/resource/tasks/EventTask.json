@@ -5,7 +5,12 @@
 			//"entry": "stop",
 			"entry": "进入福利签到",
 			"default_check": false,
-			"description": "<span style=\"color:blue\">当前签到：十日与你_夏以昼·跃跃纸端</span>"
+			"description": "<span style=\"color:blue\">当前签到：桂影盈芳</span>",
+			"pipeline_override": {
+				"进入签到_桂影盈芳": {
+					"enabled": true
+				}
+			}
 		},
 		{
 			"name": "🛍️限时活动商城领取",

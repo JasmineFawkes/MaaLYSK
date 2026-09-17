@@ -11,6 +11,9 @@
 		"next": [
 			"点击精彩活动",
 			"进入签到_十日与你",
+			"进入签到_灯宵映礼",
+			"进入签到_心动挚礼",
+			"进入签到_桂影盈芳",
 			"[JumpBack]点击活动",
 			"[JumpBack]自动过剧情",
 			"[JumpBack]返回上一级页面",
@@ -29,7 +32,7 @@
 			"type": "Click",
 			"param": {}
 		},
-		"next": ["进入签到_十日与你", "[JumpBack]精彩活动向下滑"]
+		"next": ["进入签到_十日与你","进入签到_灯宵映礼", "进入签到_心动挚礼", "进入签到_桂影盈芳", "[JumpBack]精彩活动向下滑"]
 	},
 	"进入签到_灯宵映礼": {
 		"recognition": {
@@ -43,6 +46,7 @@
 			"type": "Click",
 			"param": {}
 		},
+		"enabled": false,
 		"timeout": 6000,
 		"next": ["点击签到_灯宵映礼"]
 	},
@@ -96,6 +100,7 @@
 			"type": "Click",
 			"param": {}
 		},
+		"enabled": false,
 		"next": ["[JumpBack]退出点击（上限）popop", "stop"]
 	},
 	"进入签到_心动挚礼": {
@@ -126,9 +131,42 @@
 				]
 			}
 		},
+		"enabled": false,
 		"action": {
 			"type": "Click",
 			"param": {}
+		},
+		"next": ["[JumpBack]退出点击（上限）popop", "stop"]
+	},
+	"进入签到_桂影盈芳": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["event/signin/桂影盈芳.png"],
+				"roi": [73,36,302,1125]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"enabled": false,
+		"timeout": 6000,
+		"next": ["点击签到_桂影盈芳"]
+	},
+	"点击签到_桂影盈芳": {
+		"recognition": {
+			"type": "ColorMatch",
+			"param": {
+				"lower": [211, 120, 65],
+				"upper": [237, 175, 85],
+				"count": 10000,
+				"connected": true,
+				"roi": [103,292,505,666]
+			}
+		},
+		"action": {
+			"type": "Click"
 		},
 		"next": ["[JumpBack]退出点击（上限）popop", "stop"]
 	},
