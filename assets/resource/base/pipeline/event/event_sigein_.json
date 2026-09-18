@@ -168,6 +168,7 @@
 		"action": {
 			"type": "Click"
 		},
+		"focus": "桂影盈芳签到奖励领取成功!",
 		"next": ["[JumpBack]退出点击（上限）popop", "stop"]
 	},
 	"精彩活动向下滑": {
