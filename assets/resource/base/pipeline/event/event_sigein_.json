@@ -15,6 +15,7 @@
 			"进入签到_心动挚礼",
 			"进入签到_桂影盈芳",
 			"[JumpBack]点击活动",
+			"[JumpBack]活动页面向右滑动",
 			"[JumpBack]自动过剧情",
 			"[JumpBack]返回上一级页面",
 			"[JumpBack]导航回主页面"
@@ -33,6 +34,20 @@
 			"param": {}
 		},
 		"next": ["进入签到_十日与你","进入签到_灯宵映礼", "进入签到_心动挚礼", "进入签到_桂影盈芳", "[JumpBack]精彩活动向下滑"]
+	},
+	"活动页面向右滑动": {
+		"recognition": {
+			"type": "TemplateMatch",
+			"param": {
+				"template": ["event/activity_right_swipe.png"],
+				"roi": [641,1182,69,79]
+			}
+		},
+		"action": {
+			"type": "Click",
+			"param": {}
+		},
+		"next": []
 	},
 	"进入签到_灯宵映礼": {
 		"recognition": {
