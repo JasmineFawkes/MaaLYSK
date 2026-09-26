@@ -2,9 +2,14 @@ name: Android resource APK
 
 on:
   workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag computed by install.yml
+        required: false
+        type: string
 
 permissions:
-  contents: read
+  contents: write
 
 # Resource project integration settings. Resource developers normally only
 # need to edit this block when copying the workflow to another repository.
@@ -15,7 +20,6 @@ env:
   LAUNCHER_ICON: docs/public/logo.png
   RESOURCE_ROOT: assets
   MFA_REPOSITORY: MaaXYZ/MFAAvalonia
-  MFA_REF: v2.16.1
   P4A_ENTRYPOINT: agent/main.py
   P4A_REF: v2026.05.09
   P4A_NDK_VERSION: 28.2.13676358
@@ -47,11 +51,41 @@ jobs:
           path: resource-source
           submodules: recursive
 
+      - name: Read MFAAvalonia version from install.yml
+        id: mfa_version
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          text = Path("resource-source/.github/workflows/install.yml").read_text(
+              encoding="utf-8"
+          )
+          match = re.search(
+              r"name:\s*Download MFAAvalonia.*?tag:\s*[\"']([^\"']+)[\"']",
+              text,
+              re.S,
+          )
+          if not match:
+              raise SystemExit(
+                  "[ERR] Could not find the MFAAvalonia tag in "
+                  ".github/workflows/install.yml"
+              )
+          ref = match.group(1)
+          if not ref.startswith("v"):
+              raise SystemExit(f"[ERR] Unexpected MFAAvalonia ref: {ref}")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"mfa_ref={ref}\n")
+          print(f"MFAAvalonia ref from install.yml: {ref}")
+          PY
+
       - name: Checkout MFAAvalonia Android shell
         uses: actions/checkout@v5
         with:
           repository: ${{ env.MFA_REPOSITORY }}
-          ref: ${{ env.MFA_REF }}
+          ref: ${{ steps.mfa_version.outputs.mfa_ref }}
           path: mfa-source
 
       # The resolver below uses packaging's PEP 508 parser.  Install it
@@ -292,7 +326,7 @@ jobs:
 
           mfa_commit="$(git -C mfa-source rev-parse HEAD)"
           echo "mfa_commit=$mfa_commit" >> "$GITHUB_OUTPUT"
-          echo "Using MFAAvalonia $MFA_REPOSITORY@$mfa_commit (requested ref: $MFA_REF)"
+          echo "Using MFAAvalonia $MFA_REPOSITORY@$mfa_commit (requested ref: ${{ steps.mfa_version.outputs.mfa_ref }})"
           grep -F '<AndroidEnableMarshalMethods>false</AndroidEnableMarshalMethods>' \
             mfa-source/MFAAvalonia.Android/MFAAvalonia.Android.csproj
           grep -F '_AndroidLocalesFile' \
@@ -327,11 +361,20 @@ jobs:
         id: metadata
         shell: bash
         run: |
-          short_sha="${GITHUB_SHA::7}"
+          if [[ -n "${{ inputs.tag }}" ]]; then
+            display_version="${{ inputs.tag }}"
+            output_name="${PROJECT_NAME}-${{ inputs.tag }}-android-${{ matrix.arch }}.apk"
+            artifact_name="${PROJECT_NAME}-${{ inputs.tag }}-android-${{ matrix.arch }}"
+          else
+            short_sha="${GITHUB_SHA::7}"
+            display_version="ci.${GITHUB_RUN_NUMBER}-${short_sha}"
+            output_name="${PROJECT_NAME}-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk"
+            artifact_name="${PROJECT_NAME}-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}"
+          fi
           echo "application_id=$APPLICATION_ID" >> "$GITHUB_OUTPUT"
-          echo "display_version=ci.${GITHUB_RUN_NUMBER}-${short_sha}" >> "$GITHUB_OUTPUT"
-          echo "output_name=${PROJECT_NAME}-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk" >> "$GITHUB_OUTPUT"
-          echo "artifact_name=${PROJECT_NAME}-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}" >> "$GITHUB_OUTPUT"
+          echo "display_version=$display_version" >> "$GITHUB_OUTPUT"
+          echo "output_name=$output_name" >> "$GITHUB_OUTPUT"
+          echo "artifact_name=$artifact_name" >> "$GITHUB_OUTPUT"
           launcher_icon=$(realpath -m "resource-source/$LAUNCHER_ICON")
           resource_root=$(realpath resource-source)
           case "$launcher_icon" in "$resource_root"/*) ;; *) echo "[ERR] launcher icon outside resource repository"; exit 1;; esac
@@ -342,6 +385,8 @@ jobs:
 
       - name: Prepare MaaLYSK Android resource payload
         id: payload
+        env:
+          MAA_LYSK_VERSION: ${{ inputs.tag }}
         shell: bash
         run: |
           source_root=$(realpath resource-source)
@@ -379,6 +424,7 @@ jobs:
           python - "$payload_root" <<'PY'
           from pathlib import Path
           import json
+          import os
           import sys
 
           payload = Path(sys.argv[1])
@@ -386,15 +432,15 @@ jobs:
           if not interface_path.is_file():
               interface_path = payload / "interface.jsonc"
           interface = json.loads(interface_path.read_text(encoding="utf-8-sig"))
+          version = os.environ.get("MAA_LYSK_VERSION") or str(interface.get("version") or "")
+          if not version:
+              raise SystemExit("[ERR] MaaLYSK interface.json is missing a version")
           interface.setdefault("agent", {})["child_args"] = ["agent/main.py"]
+          interface["version"] = version
           interface_path.write_text(
               json.dumps(interface, ensure_ascii=False, indent=2) + "\n",
               encoding="utf-8",
           )
-
-          version = str(interface.get("version") or "")
-          if not version:
-              raise SystemExit("[ERR] MaaLYSK interface.json is missing a version")
           (payload / "agent" / "deploy" / ".version").write_text(
               version + "\n", encoding="utf-8"
           )
@@ -615,3 +661,14 @@ jobs:
           path: ${{ steps.apk.outputs.path }}
           if-no-files-found: error
           retention-days: 7
+
+      - name: Upload APK to GitHub Release
+        if: ${{ inputs.tag != '' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+          OUTPUT_NAME: ${{ steps.metadata.outputs.output_name }}
+        run: |
+          cd "${{ steps.apk.outputs.path }}"
+          gh release upload "$TAG" "$OUTPUT_NAME" "$OUTPUT_NAME.sha256" --clobber
