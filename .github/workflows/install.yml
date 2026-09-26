@@ -336,7 +336,10 @@ jobs:
       - name: Trigger Android APK build
         shell: bash
         run: |
-          gh workflow run --repo $GITHUB_REPOSITORY android.yml -f tag=${{ needs.meta.outputs.tag }}
+          gh api "repos/$GITHUB_REPOSITORY/dispatches" \
+            -X POST \
+            -f event_type=android-release \
+            -f "client_payload[tag]=${{ needs.meta.outputs.tag }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
