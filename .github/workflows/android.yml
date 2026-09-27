@@ -673,4 +673,5 @@ jobs:
           gh release upload "$TAG" \
             "${{ steps.apk.outputs.path }}" \
             "${{ steps.apk.outputs.path }}.sha256" \
+            --repo "$GITHUB_REPOSITORY" \
             --clobber
