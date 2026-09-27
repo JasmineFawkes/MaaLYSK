@@ -33,14 +33,20 @@
 			"type": "Click",
 			"param": {}
 		},
-		"next": ["进入签到_十日与你","进入签到_灯宵映礼", "进入签到_心动挚礼", "进入签到_桂影盈芳", "[JumpBack]精彩活动向下滑"]
+		"next": [
+			"进入签到_十日与你",
+			"进入签到_灯宵映礼",
+			"进入签到_心动挚礼",
+			"进入签到_桂影盈芳",
+			"[JumpBack]精彩活动向下滑"
+		]
 	},
 	"活动页面向右滑动": {
 		"recognition": {
 			"type": "TemplateMatch",
 			"param": {
 				"template": ["event/activity_right_swipe.png"],
-				"roi": [641,1182,69,79]
+				"roi": [641, 1182, 69, 79]
 			}
 		},
 		"action": {
@@ -158,7 +164,7 @@
 			"type": "TemplateMatch",
 			"param": {
 				"template": ["event/signin/桂影盈芳.png"],
-				"roi": [73,36,302,1125]
+				"roi": [73, 36, 302, 1125]
 			}
 		},
 		"action": {
@@ -177,7 +183,7 @@
 				"upper": [237, 175, 85],
 				"count": 10000,
 				"connected": true,
-				"roi": [103,292,505,666]
+				"roi": [103, 292, 505, 666]
 			}
 		},
 		"action": {
