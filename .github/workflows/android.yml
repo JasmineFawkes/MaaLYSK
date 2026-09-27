@@ -362,13 +362,13 @@ jobs:
           release_tag="$RELEASE_TAG"
           if [[ -n "$release_tag" ]]; then
             display_version="$release_tag"
-            output_name="${PROJECT_NAME}-${release_tag}-android-${{ matrix.arch }}.apk"
-            artifact_name="${PROJECT_NAME}-${release_tag}-android-${{ matrix.arch }}"
+            output_name="${PROJECT_NAME}-android-${{ matrix.arch }}-${release_tag}.apk"
+            artifact_name="${PROJECT_NAME}-android-${{ matrix.arch }}-${release_tag}"
           else
             short_sha="${GITHUB_SHA::7}"
             display_version="ci.${GITHUB_RUN_NUMBER}-${short_sha}"
-            output_name="${PROJECT_NAME}-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}.apk"
-            artifact_name="${PROJECT_NAME}-ci.${GITHUB_RUN_NUMBER}-${short_sha}-android-${{ matrix.arch }}"
+            output_name="${PROJECT_NAME}-android-${{ matrix.arch }}-ci.${GITHUB_RUN_NUMBER}-${short_sha}.apk"
+            artifact_name="${PROJECT_NAME}-android-${{ matrix.arch }}-ci.${GITHUB_RUN_NUMBER}-${short_sha}"
           fi
           echo "application_id=$APPLICATION_ID" >> "$GITHUB_OUTPUT"
           echo "display_version=$display_version" >> "$GITHUB_OUTPUT"
@@ -652,7 +652,6 @@ jobs:
           output_dir="$GITHUB_WORKSPACE/android-artifacts"
           mkdir -p "$output_dir"
           cp "$apk_path" "$output_dir/$OUTPUT_NAME"
-          (cd "$output_dir" && sha256sum "$OUTPUT_NAME" > "$OUTPUT_NAME.sha256")
           echo "path=$output_dir/$OUTPUT_NAME" >> "$GITHUB_OUTPUT"
 
       - name: Upload Android APK
@@ -672,6 +671,5 @@ jobs:
         run: |
           gh release upload "$TAG" \
             "${{ steps.apk.outputs.path }}" \
-            "${{ steps.apk.outputs.path }}.sha256" \
             --repo "$GITHUB_REPOSITORY" \
             --clobber
