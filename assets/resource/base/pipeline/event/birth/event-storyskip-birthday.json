@@ -23,9 +23,9 @@
 	},
 	"进入生日剧情页": {
 		"recognition": {
-			"type": "TemplateMatch",
+			"type": "OCR",
 			"param": {
-				"template": ["event/daily_get/澄云向昼菜单.png"],
+				"expected": ["岁愿萤星"],
 				"roi": [10, 1179, 701, 79]
 			}
 		},
@@ -64,7 +64,7 @@
 						"recognition": {
 							"type": "OCR",
 							"param": {
-								"expected": ["1"],
+								"expected": ["1","01"],
 								"replace": [
 									["I", "1"],
 									["l", "1"],
@@ -78,7 +78,7 @@
 						"recognition": {
 							"type": "TemplateMatch",
 							"param": {
-								"template": ["event/生日剧情未解锁.png"],
+								"template": ["event/生日剧情未解锁2026.png"],
 								"roi": [135, 1062, 105, 106],
 								"threshold": 0.6
 							}
@@ -107,7 +107,7 @@
 						"recognition": {
 							"type": "OCR",
 							"param": {
-								"expected": ["2"],
+								"expected": ["2","02"],
 								"replace": [
 									["z", "2"],
 									["Z", "2"]
@@ -120,7 +120,7 @@
 						"recognition": {
 							"type": "TemplateMatch",
 							"param": {
-								"template": ["event/生日剧情未解锁.png"],
+								"template": ["event/生日剧情未解锁2026.png"],
 								"roi": [212, 1041, 106, 107],
 								"threshold": 0.6
 							}
@@ -149,8 +149,7 @@
 						"recognition": {
 							"type": "OCR",
 							"param": {
-								"expected": ["3"],
-								"replace": [["I", "3"]],
+								"expected": ["3","03"],
 								"roi": [212, 1041, 106, 107]
 							}
 						}
@@ -159,7 +158,7 @@
 						"recognition": {
 							"type": "TemplateMatch",
 							"param": {
-								"template": ["event/生日剧情未解锁.png"],
+								"template": ["event/生日剧情未解锁2026.png"],
 								"roi": [296, 1050, 106, 106],
 								"threshold": 0.6
 							}
@@ -183,7 +182,7 @@
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["4"],
+				"expected": ["4","04"],
 				"roi": [296, 1050, 106, 106]
 			}
 		},
