@@ -138,7 +138,7 @@
 		"recognition": {
 			"type": "OCR",
 			"param": {
-				"expected": ["LOVE","YOU","LOVE YOU"],
+				"expected": ["LOVE", "YOU", "LOVE YOU"],
 				"roi": [419, 133, 276, 152]
 			}
 		},
