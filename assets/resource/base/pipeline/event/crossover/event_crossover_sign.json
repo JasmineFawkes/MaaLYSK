@@ -28,8 +28,8 @@
 			"param": {}
 		},
         "focus":"联动签到奖励领取成功!",
-		"next": ["[JumpBack]点击联动对话",
-        "[JumpBack]退出点击（上限）popop","stop"]
+		"next": ["联动签到_已完成","[JumpBack]点击联动对话","退出点击空白继续1popop",
+        "[JumpBack]退出点击（上限）popop","stop"] 
 	},
     "点击联动对话": {
         "recognition": {
